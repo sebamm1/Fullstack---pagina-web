@@ -19,7 +19,6 @@
             background-color: #212529;
             color: #f8f9fa;
         }
-        
         h1, h2, h3, .navbar-brand {
             font-family: 'Dela Gothic One', sans-serif !important;
             letter-spacing: 0.5px;
@@ -63,7 +62,8 @@
                     <button class="btn btn-outline-light btn-sm" type="submit">Buscar</button>
                 </form>
 
-                <div class="d-flex align-items-center gap-2">
+                <!-- Zona dinámica de Usuario (Foto + Nombre al estar logueado) -->
+                <div class="d-flex align-items-center gap-3" id="menuUsuario">
                     <a href="login.html" class="btn btn-outline-warning btn-sm">
                         <i class="bi bi-person-fill me-1"></i> Ingresar
                     </a>
@@ -205,6 +205,32 @@
         </div>
     </footer>
 
+    <!-- Script para mostrar foto de perfil y nombre dinámicos -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sesionIniciada = localStorage.getItem("akiba_sesion");
+            const contenedorUsuario = document.getElementById("menuUsuario");
+
+            if (sesionIniciada === "true") {
+                // Leer el nombre y el avatar guardados (o usar valores por defecto si no existen)
+                const nombreActual = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
+                const avatarActual = localStorage.getItem("akiba_avatar") || "img/logo.gif";
+
+                contenedorUsuario.innerHTML = `
+                    <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-2 bg-secondary bg-opacity-25 py-1 px-3 rounded-pill border border-secondary transition-all hover-profile" title="Editar Perfil">
+                        <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-danger object-fit-cover">
+                        <span class="fw-bold small">${nombreActual}</span>
+                    </a>
+                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm">Cerrar Sesión</button>
+                `;
+            }
+        });
+
+        function cerrarSesion() {
+            localStorage.removeItem("akiba_sesion");
+            window.location.reload();
+        }
+    </script>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>

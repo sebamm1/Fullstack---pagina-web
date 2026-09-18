@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akiba Store - Mi Perfil</title>
+    
+    <!-- Google Fonts: Dela Gothic One -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
+    <!-- CSS local de Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Dela Gothic One', sans-serif !important;
+            letter-spacing: 0.5px;
+        }
+        .avatar-option {
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+        .avatar-option:hover, .avatar-option.selected {
+            border-color: #dc3545;
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body class="bg-dark text-light d-flex flex-column min-vh-100">
+
+    <!-- 1. BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand text-danger d-flex align-items-center gap-2" href="index.html">
+                <img src="img/logo.gif" alt="Logo Akiba Store" width="40" height="40" class="rounded-circle border border-danger object-fit-cover">
+                <span class="text-light">Akiba <span class="text-danger">Store</span></span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link text-light" href="index.html">Inicio</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
+                            <li><a class="dropdown-item" href="bluray.html">Series / Películas / Anime (DVD / Blu-ray)</a></li>
+                            <li><a class="dropdown-item" href="videojuegos.html">Videojuegos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    <a href="perfil.html" class="btn btn-danger btn-sm active">
+                        <i class="bi bi-person-circle me-1"></i> Mi Perfil
+                    </a>
+                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm">Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. CONTENIDO DEL PERFIL -->
+    <main class="container my-5 flex-grow-1" style="max-width: 700px;">
+        <h1 class="text-danger mb-4 text-center">Configuración de Perfil</h1>
+
+        <div class="card bg-black border border-secondary p-4 p-md-5 rounded-4 shadow-lg text-light">
+            
+            <div class="text-center mb-4">
+                <img id="avatarActual" src="img/logo.gif" alt="Avatar" width="110" height="110" class="rounded-circle border border-danger border-3 object-fit-cover shadow mb-3">
+                <h3 id="nombreMostrado" class="h4 text-white">Usuario Akiba</h3>
+                <p class="text-muted small">correo@ejemplo.com</p>
+            </div>
+
+            <div id="alertaPerfil" class="alert d-none" role="alert"></div>
+
+            <form id="formPerfil">
+                <!-- Editar Nombre -->
+                <div class="mb-4">
+                    <label for="inputNombre" class="form-label fw-bold text-light">Nombre de Usuario</label>
+                    <input type="text" class="form-control bg-dark text-light border-secondary py-2" id="inputNombre" value="Usuario Akiba" required>
+                </div>
+
+                <!-- Subir imagen desde el computador local -->
+                <div class="mb-4">
+                    <label for="inputArchivo" class="form-label fw-bold text-light">Subir imagen desde tu Computador</label>
+                    <input type="file" class="form-control bg-dark text-light border-secondary py-2" id="inputArchivo" accept="image/*">
+                    <div class="form-text text-muted small">Selecciona una foto de perfil personalizada desde tus archivos locales.</div>
+                </div>
+
+                <!-- Selector de Avatares estilo Netflix -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-light mb-2">O elige un Avatar Oficial (Estilo Netflix)</label>
+                    <div class="d-flex flex-wrap gap-3 justify-content-center p-3 bg-secondary bg-opacity-10 rounded-3 border border-secondary">
+                        <img src="img/logo.gif" alt="Avatar 1" class="rounded-circle avatar-option" onclick="seleccionarAvatar('img/logo.gif', this)">
+                        <img src="img/loginyregistro.jpg" alt="Avatar 2" class="rounded-circle avatar-option" onclick="seleccionarAvatar('img/loginyregistro.jpg', this)">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-danger w-100 py-2 fw-bold shadow">Guardar Cambios</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- 3. FOOTER -->
+    <footer class="bg-black text-light py-4 border-top border-secondary mt-auto">
+        <div class="container text-center">
+            <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Script de lógica y persistencia -->
+    <script>
+        let avatarSeleccionado = localStorage.getItem("akiba_avatar") || "img/logo.gif";
+        let nombreGuardado = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
+
+        // Cargar datos guardados al abrir la página
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("inputNombre").value = nombreGuardado;
+            document.getElementById("nombreMostrado").textContent = nombreGuardado;
+            document.getElementById("avatarActual").src = avatarSeleccionado;
+        });
+
+        // Seleccionar avatar oficial de la tienda
+        function seleccionarAvatar(rutaImg, elementoVisual) {
+            avatarSeleccionado = rutaImg;
+            document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
+            elementoVisual.classList.add('selected');
+            document.getElementById('avatarActual').src = rutaImg;
+            // Limpiar selector local si elige uno oficial
+            document.getElementById('inputArchivo').value = "";
+        }
+
+        // Escuchar si el usuario sube una imagen desde su computador
+        document.getElementById('inputArchivo').addEventListener('change', function(e) {
+            const archivo = e.target.files[0];
+            if (archivo) {
+                const lector = new FileReader();
+                lector.onload = function(evento) {
+                    avatarSeleccionado = evento.target.result; // Convierte la imagen local a código para mostrarla y guardarla
+                    document.getElementById('avatarActual').src = avatarSeleccionado;
+                    // Quitar selección de avatares oficiales
+                    document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
+                }
+                lector.readAsDataURL(archivo);
+            }
+        });
+
+        // Guardar cambios en el almacenamiento local del navegador
+        document.getElementById('formPerfil').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevoNombre = document.getElementById('inputNombre').value;
+            const alerta = document.getElementById('alertaPerfil');
+
+            if (nuevoNombre.trim() !== "") {
+                nombreGuardado = nuevoNombre;
+                
+                // Guardar permanentemente
+                localStorage.setItem("akiba_nombre", nombreGuardado);
+                localStorage.setItem("akiba_avatar", avatarSeleccionado);
+
+                document.getElementById('nombreMostrado').textContent = nombreGuardado;
+                
+                alerta.className = "alert alert-success bg-success text-white border-0 text-center";
+                alerta.textContent = "¡Perfil actualizado y guardado con éxito!";
+                alerta.classList.remove('d-none');
+                
+                setTimeout(() => {
+                    alerta.classList.add('d-none');
+                }, 3000);
+            }
+        });
+
+        function cerrarSesion() {
+            localStorage.removeItem("akiba_sesion");
+            window.location.href = "index.html";
+        }
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
