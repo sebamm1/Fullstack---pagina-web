@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akiba Store - Tienda de Entretenimiento Físico y Merchandising</title>
+    
+    <!-- Google Fonts: Dela Gothic One -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
+    <!-- CSS local de Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+        
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Dela Gothic One', sans-serif !important;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+
+    <!-- 1. BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand text-danger d-flex align-items-center gap-2" href="index.html">
+                <img src="img/logo.gif" alt="Logo Akiba Store" width="40" height="40" class="rounded-circle border border-danger object-fit-cover">
+                <span class="text-light">Akiba <span class="text-danger">Store</span></span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active text-danger fw-bold" href="index.html">Inicio</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
+                            <li><a class="dropdown-item" href="bluray.html">Series / Películas / Anime (DVD / Blu-ray)</a></li>
+                            <li><a class="dropdown-item" href="videojuegos.html">Videojuegos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising (Poleras, Juguetes, Colección)</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#">Catálogo Completo</a></li>
+                </ul>
+
+                <form class="d-flex me-3" role="search">
+                    <input class="form-control form-control-sm me-2 bg-dark text-light border-secondary" type="search" placeholder="Buscar producto..." aria-label="Search">
+                    <button class="btn btn-outline-light btn-sm" type="submit">Buscar</button>
+                </form>
+
+                <div class="d-flex align-items-center gap-2">
+                    <a href="login.html" class="btn btn-outline-warning btn-sm">
+                        <i class="bi bi-person-fill me-1"></i> Ingresar
+                    </a>
+                    <a href="registro.html" class="btn btn-danger btn-sm">
+                        <i class="bi bi-person-plus-fill me-1"></i> Registro
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. BANNER PRINCIPAL / HERO -->
+    <header class="bg-black text-white text-center py-5 mb-5 border-bottom border-danger">
+        <div class="container py-4">
+            <h1 class="display-5 text-danger mb-3">¡Vuelve a vivir el formato físico y coleccionables!</h1>
+            <p class="lead mb-4 text-light font-monospace">Encuentra tus álbumes, películas, videojuegos, poleras, juguetes y artículos de colección favoritos.</p>
+            <a href="#catalogo" class="btn btn-danger btn-lg px-4 shadow">Explorar Catálogo</a>
+        </div>
+    </header>
+
+    <!-- 3. SECCIÓN DE EXPLORACIÓN Y PRODUCTOS DESTACADOS -->
+    <main class="container mb-5" id="catalogo">
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-5">
+                <h2 class="mb-0 text-light fs-3">Productos Destacados</h2>
+            </div>
+            <div class="col-md-7 text-md-end mt-2 mt-md-0">
+                <span class="text-muted me-2 small">Filtrar:</span>
+                <div class="btn-group flex-wrap" role="group">
+                    <a href="index.html" class="btn btn-outline-danger btn-sm active">Todos</a>
+                    <a href="musica.html" class="btn btn-outline-danger btn-sm">CD / Vinilo</a>
+                    <a href="bluray.html" class="btn btn-outline-danger btn-sm">Blu-ray</a>
+                    <a href="videojuegos.html" class="btn btn-outline-danger btn-sm">Videojuegos</a>
+                    <a href="merchandising.html" class="btn btn-outline-danger btn-sm">Merchandising</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
+                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 200px;">
+                        <i class="bi bi-film display-1 text-danger"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-2">
+                            <span class="badge bg-danger">Anime</span>
+                            <span class="badge bg-dark border border-secondary">Blu-ray</span>
+                        </div>
+                        <h3 class="card-title h5">Neon Genesis Evangelion - Box Set</h3>
+                        <p class="card-text text-muted small">Edición coleccionista en formato Blu-ray con audio dual y extras exclusivos.</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold text-success fs-5">$29.990</span>
+                                <span class="badge bg-warning text-dark">Stock Bajo: 4 unid.</span>
+                            </div>
+                            <button class="btn btn-danger w-100">Ver Detalle / Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
+                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 200px;">
+                        <i class="bi bi-gift display-1 text-warning"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-2">
+                            <span class="badge bg-warning text-dark">Merchandising</span>
+                            <span class="badge bg-dark border border-secondary">Colección</span>
+                        </div>
+                        <h3 class="card-title h5">Figura Coleccionable Edición Limitada</h3>
+                        <p class="card-text text-muted small">Figura articulada original de alta calidad con accesorios intercambiables.</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold text-success fs-5">$39.990</span>
+                                <span class="badge bg-success">Disponible</span>
+                            </div>
+                            <button class="btn btn-danger w-100">Ver Detalle / Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
+                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 200px;">
+                        <i class="bi bi-tag display-1 text-info"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-2">
+                            <span class="badge bg-warning text-dark">Merchandising</span>
+                            <span class="badge bg-dark border border-secondary">Polera</span>
+                        </div>
+                        <h3 class="card-title h5">Polera Estampada Akiba Style (Algodón)</h3>
+                        <p class="card-text text-muted small">Polera de algodón 100% con diseño exclusivo retro/anime de alta durabilidad.</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold text-success fs-5">$14.990</span>
+                                <span class="badge bg-success">Disponible (Tallas S-XL)</span>
+                            </div>
+                            <button class="btn btn-danger w-100">Ver Detalle / Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 4. FOOTER -->
+    <footer class="bg-black text-light pt-5 pb-4 border-top border-secondary mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-uppercase text-danger">Akiba Store</h5>
+                    <p class="text-white-50 small">Tu tienda especializada en entretenimiento físico y artículos de colección. Revive la nostalgia y lleva tu pasión al siguiente nivel.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-uppercase">Contacto</h5>
+                    <p class="mb-2 text-white-50 small"><i class="bi bi-geo-alt-fill me-2"></i> Santiago, Chile</p>
+                    <p class="mb-2 text-white-50 small"><i class="bi bi-envelope-fill me-2"></i> contacto@akibastore.cl</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-uppercase">Panel Administrativo</h5>
+                    <p class="text-white-50 small">Acceso exclusivo para administradores de inventario y pedidos.</p>
+                    <a href="login.html" class="btn btn-outline-danger btn-sm">Entrar como Admin</a>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                    <span class="text-white-50 small">Desarrollado con HTML5, Bootstrap 5 y CSS</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

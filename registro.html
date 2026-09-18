@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akiba Store - Registro</title>
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/miestilo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* Fondo con tu nueva imagen JPG en la carpeta img */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('img/loginyregistro.jpg') !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+            background-color: #111;
+        }
+
+        /* Capa oscura semitransparente para la atmósfera */
+        .capa-oscura {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.55);
+            z-index: 0;
+        }
+
+        /* Elementos por encima de la capa oscura */
+        nav, main {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Tarjeta con efecto de vidrio esmerilado (Glassmorphism) */
+        .card-glass {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            color: #fff;
+        }
+
+        /* Campos de texto traslúcidos */
+        .form-control-glass {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .form-control-glass::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .form-control-glass:focus {
+            background: rgba(0, 0, 0, 0.6);
+            border-color: #dc3545;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <div class="capa-oscura"></div>
+
+    <nav class="navbar navbar-dark bg-transparent">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-light d-flex align-items-center gap-2" href="index.html">
+                <img src="img/logo.gif" alt="Logo" width="35" height="35" class="rounded-circle border border-danger object-fit-cover">
+                Akiba Store
+            </a>
+            <a href="index.html" class="btn btn-outline-light btn-sm">Volver al Inicio</a>
+        </div>
+    </nav>
+
+    <main class="container d-flex justify-content-center align-items-center flex-grow-1 my-5">
+        <div class="card card-glass p-5 w-100" style="max-width: 420px;">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-white mb-1" style="font-size: 2rem;">Sign Up</h2>
+            </div>
+
+            <div id="alertaRegistro" class="alert d-none" role="alert"></div>
+
+            <form id="formRegistro">
+                <div class="mb-3">
+                    <input type="text" class="form-control form-control-glass py-2 px-3 rounded-2" id="nombreRegistro" placeholder="Full Name" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="email" class="form-control form-control-glass py-2 px-3 rounded-2" id="emailRegistro" placeholder="Email Address" required>
+                </div>
+
+                <div class="mb-4">
+                    <input type="password" class="form-control form-control-glass py-2 px-3 rounded-2" id="passwordRegistro" placeholder="Password (min. 6 chars)" required>
+                </div>
+
+                <button type="submit" class="btn btn-danger w-100 py-2 mb-4 fw-bold shadow">Sign Up</button>
+
+                <div class="text-center">
+                    <p class="small text-white-50">Already have an account? <a href="login.html" class="text-white text-decoration-none fw-bold">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('formRegistro').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombreRegistro').value;
+            const email = document.getElementById('emailRegistro').value;
+            const password = document.getElementById('passwordRegistro').value;
+            const alerta = document.getElementById('alertaRegistro');
+
+            if (password.length < 6) {
+                alerta.className = "alert alert-danger bg-danger text-white border-0";
+                alerta.textContent = "La contraseña debe tener al menos 6 caracteres.";
+                alerta.classList.remove('d-none');
+                return;
+            }
+
+            if (nombre && email && password) {
+                alerta.className = "alert alert-success bg-success text-white border-0";
+                alerta.textContent = "¡Registro exitoso! Redirigiendo...";
+                alerta.classList.remove('d-none');
+                setTimeout(() => { window.location.href = "login.html"; }, 1500);
+            }
+        });
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

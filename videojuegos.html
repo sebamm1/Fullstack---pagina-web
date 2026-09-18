@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akiba Store - Videojuegos en Formato Físico</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Dela Gothic One', sans-serif !important;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-secondary">
+        <div class="container">
+            <a class="navbar-brand text-danger d-flex align-items-center gap-2" href="index.html">
+                <img src="img/logo.gif" alt="Logo Akiba Store" width="40" height="40" class="rounded-circle border border-danger object-fit-cover">
+                <span class="text-light">Akiba <span class="text-danger">Store</span></span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link text-light" href="index.html">Inicio</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
+                            <li><a class="dropdown-item" href="bluray.html">Series / Películas / Anime (DVD / Blu-ray)</a></li>
+                            <li><a class="dropdown-item active text-danger" href="videojuegos.html">Videojuegos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="merchandising.html">Merchandising</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-2">
+                    <a href="login.html" class="btn btn-outline-warning btn-sm"><i class="bi bi-person-fill me-1"></i> Ingresar</a>
+                    <a href="registro.html" class="btn btn-danger btn-sm"><i class="bi bi-person-plus-fill me-1"></i> Registro</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5 flex-grow-1 text-center">
+        <h1 class="text-danger mb-4">Videojuegos en Formato Físico</h1>
+        <p class="text-muted lead mb-5">Encuentra discos originales para tus consolas favoritas.</p>
+
+        <div class="p-5 border border-secondary border-dashed rounded-4 bg-black bg-opacity-50">
+            <i class="bi bi-controller display-1 text-muted mb-3 d-block"></i>
+            <h3 class="h4 text-light">Próximamente más videojuegos en esta categoría</h3>
+            <p class="text-muted small">Estamos actualizando nuestro catálogo de juegos físicos.</p>
+            <a href="index.html" class="btn btn-outline-light mt-3">Volver al Inicio</a>
+        </div>
+    </main>
+
+    <footer class="bg-black text-light py-4 border-top border-secondary mt-auto">
+        <div class="container text-center">
+            <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
