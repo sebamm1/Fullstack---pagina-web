@@ -3,195 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akiba Store - Mi Perfil</title>
+    <title>Akiba Store - Mi Perfil y Seguridad</title>
     
-    <!-- Google Fonts: Dela Gothic One -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 
-    <!-- CSS local de Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
-        body {
-            background-color: #212529;
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: url('img/loginyregistro.jpg') !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+            background-color: #111;
             color: #f8f9fa;
         }
-        h1, h2, h3, .navbar-brand {
+
+        h2, h5, .navbar-brand {
             font-family: 'Dela Gothic One', sans-serif !important;
             letter-spacing: 0.5px;
         }
-        .avatar-option {
-            width: 75px;
-            height: 75px;
-            object-fit: cover;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.2s ease-in-out;
+
+        .capa-oscura {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 0;
         }
-        .avatar-option:hover, .avatar-option.selected {
+
+        nav, main, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            color: #fff;
+        }
+
+        .form-control-glass {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .form-control-glass::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .form-control-glass:focus {
+            background: rgba(0, 0, 0, 0.6);
             border-color: #dc3545;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+        }
+
+        .avatar-option {
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .avatar-option:hover {
             transform: scale(1.08);
+            border-color: #dc3545 !important;
+        }
+        .avatar-selected {
+            border: 3px solid #dc3545 !important;
+            box-shadow: 0 0 15px rgba(220, 53, 69, 0.8);
         }
     </style>
 </head>
-<body class="bg-dark text-light d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
+
+    <div class="capa-oscura"></div>
 
     <!-- 1. BARRA DE NAVEGACIÓN -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
         <div class="container">
-            <a class="navbar-brand text-danger d-flex align-items-center gap-2" href="index.html">
+            <a class="navbar-brand text-light d-flex align-items-center gap-2" href="index.html">
                 <img src="img/logo.gif" alt="Logo Akiba Store" width="40" height="40" class="rounded-circle border border-danger object-fit-cover">
-                <span class="text-light">Akiba <span class="text-danger">Store</span></span>
+                <span>Akiba <span class="text-danger">Store</span></span>
             </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link text-light" href="index.html">Inicio</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
-                            Categorías
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
-                            <li><a class="dropdown-item" href="bluray.html">Series / Películas / Anime (DVD / Blu-ray)</a></li>
-                            <li><a class="dropdown-item" href="videojuegos.html">Videojuegos</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <div class="d-flex align-items-center gap-2">
-                    <a href="perfil.html" class="btn btn-danger btn-sm active">
-                        <i class="bi bi-person-circle me-1"></i> Mi Perfil
-                    </a>
-                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm">Cerrar Sesión</button>
-                </div>
+            <div class="ms-auto">
+                <a href="index.html" class="btn btn-outline-light btn-sm">Volver al Inicio</a>
             </div>
         </div>
     </nav>
 
-    <!-- 2. CONTENIDO DEL PERFIL -->
-    <main class="container my-5 flex-grow-1" style="max-width: 700px;">
-        <h1 class="text-danger mb-4 text-center">Configuración de Perfil</h1>
-
-        <div class="card bg-black border border-secondary p-4 p-md-5 rounded-4 shadow-lg text-light">
+    <!-- 2. CONTENIDO DEL PERFIL Y SEGURIDAD -->
+    <main class="container my-auto py-5 flex-grow-1 d-flex justify-content-center align-items-center" style="max-width: 650px;">
+        <div class="card card-glass p-4 p-md-5 w-100 shadow-lg">
             
             <div class="text-center mb-4">
-                <img id="avatarActual" src="img/logo.gif" alt="Avatar" width="110" height="110" class="rounded-circle border border-danger border-3 object-fit-cover shadow mb-3">
-                <h3 id="nombreMostrado" class="h4 text-white">Usuario Akiba</h3>
-                <p class="text-muted small">correo@ejemplo.com</p>
+                <h2 class="text-white fs-3 mb-1">Mi Perfil y Seguridad</h2>
+                <p class="text-white-50 small">Actualiza tu identidad visual o gestiona tu contraseña de acceso.</p>
             </div>
 
             <div id="alertaPerfil" class="alert d-none" role="alert"></div>
 
-            <form id="formPerfil">
-                <!-- Editar Nombre -->
-                <div class="mb-4">
-                    <label for="inputNombre" class="form-label fw-bold text-light">Nombre de Usuario</label>
-                    <input type="text" class="form-control bg-dark text-light border-secondary py-2" id="inputNombre" value="Usuario Akiba" required>
-                </div>
+            <!-- FORMULARIO 1: DATOS PERSONALES Y AVATAR -->
+            <form id="formPerfil" class="mb-4 pb-4 border-bottom border-secondary border-opacity-50">
+                <h5 class="text-white fs-6 mb-3"><i class="bi bi-person-badge me-2 text-danger"></i>Información Personal</h5>
+                
+                <div class="text-center mb-3">
+                    <img id="previewAvatar" src="img/logo.gif" alt="Avatar actual" width="90" height="90" class="rounded-circle border border-danger object-fit-cover shadow mb-3">
+                    
+                    <div class="mb-3">
+                        <label for="nombrePerfil" class="form-label text-white-50 small">Nombre de Usuario</label>
+                        <input type="text" class="form-control form-control-glass text-center fw-bold mx-auto py-2" id="nombrePerfil" style="max-width: 280px;" required>
+                    </div>
 
-                <!-- Subir imagen desde el computador local -->
-                <div class="mb-4">
-                    <label for="inputArchivo" class="form-label fw-bold text-light">Subir imagen desde tu Computador</label>
-                    <input type="file" class="form-control bg-dark text-light border-secondary py-2" id="inputArchivo" accept="image/*">
-                    <div class="form-text text-muted small">Selecciona una foto de perfil personalizada desde tus archivos locales.</div>
-                </div>
-
-                <!-- Selector de Avatares estilo Netflix -->
-                <div class="mb-4">
-                    <label class="form-label fw-bold text-light mb-2">O elige un Avatar Oficial (Estilo Netflix)</label>
-                    <div class="d-flex flex-wrap gap-3 justify-content-center p-3 bg-secondary bg-opacity-10 rounded-3 border border-secondary">
-                        <img src="img/logo.gif" alt="Avatar 1" class="rounded-circle avatar-option" onclick="seleccionarAvatar('img/logo.gif', this)">
-                        <img src="img/loginyregistro.jpg" alt="Avatar 2" class="rounded-circle avatar-option" onclick="seleccionarAvatar('img/loginyregistro.jpg', this)">
+                    <div class="mb-3">
+                        <label for="inputSubirFoto" class="form-label text-white-50 small d-block">Subir foto desde tu equipo:</label>
+                        <input type="file" class="form-control form-control-glass form-control-sm mx-auto" id="inputSubirFoto" accept="image/*" style="max-width: 300px;">
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-danger w-100 py-2 fw-bold shadow">Guardar Cambios</button>
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small d-block text-center mb-2">O elige un avatar de la colección:</label>
+                    <div class="d-flex justify-content-center gap-2 flex-wrap">
+                        <img src="img/rock.jpg" alt="Rock" width="55" height="55" class="rounded-circle border border-secondary object-fit-cover avatar-option" onclick="seleccionarAvatar('img/rock.jpg', this)">
+                        <img src="img/chicaanime.jpg" alt="Chica Anime" width="55" height="55" class="rounded-circle border border-secondary object-fit-cover avatar-option" onclick="seleccionarAvatar('img/chicaanime.jpg', this)">
+                        <img src="img/chica2.jpg" alt="Chica 2" width="55" height="55" class="rounded-circle border border-secondary object-fit-cover avatar-option" onclick="seleccionarAvatar('img/chica2.jpg', this)">
+                        <img src="img/cine.jpg" alt="Cine" width="55" height="55" class="rounded-circle border border-secondary object-fit-cover avatar-option" onclick="seleccionarAvatar('img/cine.jpg', this)">
+                        <img src="img/logo.gif" alt="Logo" width="55" height="55" class="rounded-circle border border-secondary object-fit-cover avatar-option" onclick="seleccionarAvatar('img/logo.gif', this)">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-danger w-100 py-2 fw-bold shadow">Guardar Cambios de Perfil</button>
             </form>
+
+            <!-- FORMULARIO 2: CAMBIAR / RESTABLECER CONTRASEÑA -->
+            <form id="formPassword">
+                <h5 class="text-white fs-6 mb-3"><i class="bi bi-shield-lock-fill me-2 text-danger"></i>Seguridad y Contraseña</h5>
+                
+                <div class="mb-3">
+                    <label for="passActual" class="form-label text-white-50 small">Contraseña Actual</label>
+                    <input type="password" class="form-control form-control-glass py-2" id="passActual" placeholder="Ingresa tu clave actual" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="passNueva" class="form-label text-white-50 small">Nueva Contraseña (mín. 6 caracteres)</label>
+                    <input type="password" class="form-control form-control-glass py-2" id="passNueva" placeholder="Ingresa tu nueva clave" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="passConfirmar" class="form-label text-white-50 small">Confirmar Nueva Contraseña</label>
+                    <input type="password" class="form-control form-control-glass py-2" id="passConfirmar" placeholder="Repite la nueva clave" required>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-outline-light w-50 py-2 fw-bold">Actualizar Clave</button>
+                    <button type="button" onclick="restablecerContraseñaSistema()" class="btn btn-outline-warning w-50 py-2 fw-bold" title="Restablecer clave por defecto">Restablecer</button>
+                </div>
+            </form>
+
         </div>
     </main>
 
     <!-- 3. FOOTER -->
-    <footer class="bg-black text-light py-4 border-top border-secondary mt-auto">
-        <div class="container text-center">
-            <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Todos los derechos reservados.</p>
+    <footer class="bg-transparent text-light py-3 text-center">
+        <div class="container">
+            <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Creado por Seba.</p>
         </div>
     </footer>
 
-    <!-- Script de lógica y persistencia -->
+    <!-- Script de lógica de perfil y contraseñas -->
     <script>
         let avatarSeleccionado = localStorage.getItem("akiba_avatar") || "img/logo.gif";
-        let nombreGuardado = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
 
-        // Cargar datos guardados al abrir la página
         document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("inputNombre").value = nombreGuardado;
-            document.getElementById("nombreMostrado").textContent = nombreGuardado;
-            document.getElementById("avatarActual").src = avatarSeleccionado;
+            const nombreActual = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
+            document.getElementById("nombrePerfil").value = nombreActual;
+            document.getElementById("previewAvatar").src = avatarSeleccionado;
         });
 
-        // Seleccionar avatar oficial de la tienda
-        function seleccionarAvatar(rutaImg, elementoVisual) {
-            avatarSeleccionado = rutaImg;
-            document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
-            elementoVisual.classList.add('selected');
-            document.getElementById('avatarActual').src = rutaImg;
-            // Limpiar selector local si elige uno oficial
-            document.getElementById('inputArchivo').value = "";
+        function seleccionarAvatar(rutaImagen, elementoImg) {
+            avatarSeleccionado = rutaImagen;
+            document.getElementById("previewAvatar").src = rutaImagen;
+            document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('avatar-selected'));
+            elementoImg.classList.add('avatar-selected');
         }
 
-        // Escuchar si el usuario sube una imagen desde su computador
-        document.getElementById('inputArchivo').addEventListener('change', function(e) {
+        document.getElementById("inputSubirFoto").addEventListener("change", function(e) {
             const archivo = e.target.files[0];
             if (archivo) {
                 const lector = new FileReader();
                 lector.onload = function(evento) {
-                    avatarSeleccionado = evento.target.result; // Convierte la imagen local a código para mostrarla y guardarla
-                    document.getElementById('avatarActual').src = avatarSeleccionado;
-                    // Quitar selección de avatares oficiales
-                    document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
-                }
+                    avatarSeleccionado = evento.target.result;
+                    document.getElementById("previewAvatar").src = avatarSeleccionado;
+                    document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('avatar-selected'));
+                };
                 lector.readAsDataURL(archivo);
             }
         });
 
-        // Guardar cambios en el almacenamiento local del navegador
-        document.getElementById('formPerfil').addEventListener('submit', function(e) {
+        // 1. Guardar cambios de perfil (Nombre y Avatar)
+        document.getElementById("formPerfil").addEventListener("submit", function(e) {
             e.preventDefault();
-            const nuevoNombre = document.getElementById('inputNombre').value;
-            const alerta = document.getElementById('alertaPerfil');
+            const nuevoNombre = document.getElementById("nombrePerfil").value.trim();
+            const alerta = document.getElementById("alertaPerfil");
 
-            if (nuevoNombre.trim() !== "") {
-                nombreGuardado = nuevoNombre;
-                
-                // Guardar permanentemente
-                localStorage.setItem("akiba_nombre", nombreGuardado);
-                localStorage.setItem("akiba_avatar", avatarSeleccionado);
+            if (nuevoNombre === "") return;
 
-                document.getElementById('nombreMostrado').textContent = nombreGuardado;
-                
-                alerta.className = "alert alert-success bg-success text-white border-0 text-center";
-                alerta.textContent = "¡Perfil actualizado y guardado con éxito!";
-                alerta.classList.remove('d-none');
-                
-                setTimeout(() => {
-                    alerta.classList.add('d-none');
-                }, 3000);
-            }
+            localStorage.setItem("akiba_nombre", nuevoNombre);
+            localStorage.setItem("akiba_avatar", avatarSeleccionado);
+
+            alerta.className = "alert alert-success bg-success text-white border-0 small text-center";
+            alerta.textContent = "¡Perfil actualizado con éxito!";
+            alerta.classList.remove('d-none');
+
+            setTimeout(() => { alerta.classList.add('d-none'); }, 3000);
         });
 
-        function cerrarSesion() {
-            localStorage.removeItem("akiba_sesion");
-            window.location.href = "index.html";
+        // 2. Cambiar Contraseña
+        document.getElementById("formPassword").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const passActualIngresada = document.getElementById("passActual").value;
+            const passNueva = document.getElementById("passNueva").value;
+            const passConfirmar = document.getElementById("passConfirmar").value;
+            const alerta = document.getElementById("alertaPerfil");
+
+            // Obtener clave real guardada (o valor por defecto "123456")
+            const passRegistrada = localStorage.getItem("akiba_reg_pass") || "123456";
+
+            if (passActualIngresada !== passRegistrada) {
+                alerta.className = "alert alert-danger bg-danger text-white border-0 small text-center";
+                alerta.textContent = "La contraseña actual es incorrecta.";
+                alerta.classList.remove('d-none');
+                return;
+            }
+
+            if (passNueva.length < 6) {
+                alerta.className = "alert alert-danger bg-danger text-white border-0 small text-center";
+                alerta.textContent = "La nueva contraseña debe tener al menos 6 caracteres.";
+                alerta.classList.remove('d-none');
+                return;
+            }
+
+            if (passNueva !== passConfirmar) {
+                alerta.className = "alert alert-danger bg-danger text-white border-0 small text-center";
+                alerta.textContent = "Las nuevas contraseñas no coinciden.";
+                alerta.classList.remove('d-none');
+                return;
+            }
+
+            // Guardar nueva clave
+            localStorage.setItem("akiba_reg_pass", passNueva);
+
+            alerta.className = "alert alert-success bg-success text-white border-0 small text-center";
+            alerta.textContent = "¡Contraseña cambiada con éxito!";
+            alerta.classList.remove('d-none');
+
+            document.getElementById("formPassword").reset();
+            setTimeout(() => { alerta.classList.add('d-none'); }, 3000);
+        });
+
+        // 3. Restablecer Contraseña (por si el usuario se enreda o quiere volver al valor inicial de emergencia)
+        function restablecerContraseñaSistema() {
+            const confirmar = confirm("¿Deseas restablecer tu contraseña al valor por defecto (123456)?");
+            const alerta = document.getElementById("alertaPerfil");
+
+            if (confirmar) {
+                localStorage.setItem("akiba_reg_pass", "123456");
+                alerta.className = "alert alert-warning bg-warning text-dark border-0 small text-center fw-bold";
+                alerta.textContent = "Contraseña restablecida a la clave por defecto: 123456";
+                alerta.classList.remove('d-none');
+                document.getElementById("formPassword").reset();
+                setTimeout(() => { alerta.classList.add('d-none'); }, 4000);
+            }
         }
     </script>
     <script src="js/bootstrap.bundle.min.js"></script>
