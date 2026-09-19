@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akiba Store - Registro</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/miestilo.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
-        /* Fondo con tu nueva imagen JPG en la carpeta img */
         html, body {
             height: 100%;
             margin: 0;
@@ -23,7 +25,11 @@
             background-color: #111;
         }
 
-        /* Capa oscura semitransparente para la atmósfera */
+        h2, .navbar-brand {
+            font-family: 'Dela Gothic One', sans-serif !important;
+            letter-spacing: 0.5px;
+        }
+
         .capa-oscura {
             position: fixed;
             top: 0;
@@ -34,13 +40,11 @@
             z-index: 0;
         }
 
-        /* Elementos por encima de la capa oscura */
         nav, main {
             position: relative;
             z-index: 2;
         }
 
-        /* Tarjeta con efecto de vidrio esmerilado (Glassmorphism) */
         .card-glass {
             background: rgba(255, 255, 255, 0.12) !important;
             backdrop-filter: blur(12px);
@@ -51,7 +55,6 @@
             color: #fff;
         }
 
-        /* Campos de texto traslúcidos */
         .form-control-glass {
             background: rgba(0, 0, 0, 0.35);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -74,7 +77,7 @@
 
     <nav class="navbar navbar-dark bg-transparent">
         <div class="container">
-            <a class="navbar-brand fw-bold text-light d-flex align-items-center gap-2" href="index.html">
+            <a class="navbar-brand text-light d-flex align-items-center gap-2" href="index.html">
                 <img src="img/logo.gif" alt="Logo" width="35" height="35" class="rounded-circle border border-danger object-fit-cover">
                 Akiba Store
             </a>
@@ -85,28 +88,32 @@
     <main class="container d-flex justify-content-center align-items-center flex-grow-1 my-5">
         <div class="card card-glass p-5 w-100" style="max-width: 420px;">
             <div class="text-center mb-4">
-                <h2 class="fw-bold text-white mb-1" style="font-size: 2rem;">Sign Up</h2>
+                <h2 class="text-white mb-1" style="font-size: 2rem;">Registro</h2>
             </div>
 
             <div id="alertaRegistro" class="alert d-none" role="alert"></div>
 
             <form id="formRegistro">
                 <div class="mb-3">
-                    <input type="text" class="form-control form-control-glass py-2 px-3 rounded-2" id="nombreRegistro" placeholder="Full Name" required>
+                    <input type="text" class="form-control form-control-glass py-2 px-3 rounded-2" id="nombreRegistro" placeholder="Nombre de usuario" required>
                 </div>
 
                 <div class="mb-3">
-                    <input type="email" class="form-control form-control-glass py-2 px-3 rounded-2" id="emailRegistro" placeholder="Email Address" required>
+                    <input type="email" class="form-control form-control-glass py-2 px-3 rounded-2" id="emailRegistro" placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="password" class="form-control form-control-glass py-2 px-3 rounded-2" id="passwordRegistro" placeholder="Contraseña (mín. 6 caracteres)" required>
                 </div>
 
                 <div class="mb-4">
-                    <input type="password" class="form-control form-control-glass py-2 px-3 rounded-2" id="passwordRegistro" placeholder="Password (min. 6 chars)" required>
+                    <input type="password" class="form-control form-control-glass py-2 px-3 rounded-2" id="confirmPassword" placeholder="Confirmar contraseña" required>
                 </div>
 
-                <button type="submit" class="btn btn-danger w-100 py-2 mb-4 fw-bold shadow">Sign Up</button>
+                <button type="submit" class="btn btn-danger w-100 py-2 mb-4 fw-bold shadow">Registrarse</button>
 
                 <div class="text-center">
-                    <p class="small text-white-50">Already have an account? <a href="login.html" class="text-white text-decoration-none fw-bold">Login</a></p>
+                    <p class="small text-white-50">¿Ya tienes cuenta? <a href="login.html" class="text-white text-decoration-none fw-bold">Inicia Sesión</a></p>
                 </div>
             </form>
         </div>
@@ -115,24 +122,39 @@
     <script>
         document.getElementById('formRegistro').addEventListener('submit', function(e) {
             e.preventDefault();
-            const nombre = document.getElementById('nombreRegistro').value;
-            const email = document.getElementById('emailRegistro').value;
+            const nombre = document.getElementById('nombreRegistro').value.trim();
+            const email = document.getElementById('emailRegistro').value.trim();
             const password = document.getElementById('passwordRegistro').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
             const alerta = document.getElementById('alertaRegistro');
 
+            // Normativas de validación
             if (password.length < 6) {
-                alerta.className = "alert alert-danger bg-danger text-white border-0";
+                alerta.className = "alert alert-danger bg-danger text-white border-0 small text-center";
                 alerta.textContent = "La contraseña debe tener al menos 6 caracteres.";
                 alerta.classList.remove('d-none');
                 return;
             }
 
-            if (nombre && email && password) {
-                alerta.className = "alert alert-success bg-success text-white border-0";
-                alerta.textContent = "¡Registro exitoso! Redirigiendo...";
+            if (password !== confirmPass) {
+                alerta.className = "alert alert-danger bg-danger text-white border-0 small text-center";
+                alerta.textContent = "Las contraseñas no coinciden.";
                 alerta.classList.remove('d-none');
-                setTimeout(() => { window.location.href = "login.html"; }, 1500);
+                return;
             }
+
+            // Guardar datos simulados del usuario en localStorage para el login
+            localStorage.setItem("akiba_reg_email", email);
+            localStorage.setItem("akiba_reg_pass", password);
+            localStorage.setItem("akiba_nombre", nombre); // Sincroniza con su perfil
+
+            alerta.className = "alert alert-success bg-success text-white border-0 small text-center";
+            alerta.textContent = "¡Registro exitoso! Redirigiendo al login...";
+            alerta.classList.remove('d-none');
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1500);
         });
     </script>
     <script src="js/bootstrap.bundle.min.js"></script>
