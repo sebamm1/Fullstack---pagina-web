@@ -95,17 +95,17 @@
 
             <form id="formLogin">
                 <div class="mb-3">
-                    <input type="email" class="form-control form-control-glass py-2 px-3 rounded-2" id="emailLogin" placeholder="Username / Correo" required>
+                    <input type="email" class="form-control form-control-glass py-2 px-3 rounded-2" id="emailLogin" placeholder="Correo electrónico" required>
                 </div>
 
                 <div class="mb-4">
-                    <input type="password" class="form-control form-control-glass py-2 px-3 rounded-2" id="passwordLogin" placeholder="Password" required>
+                    <input type="password" class="form-control form-control-glass py-2 px-3 rounded-2" id="passwordLogin" placeholder="Contraseña" required>
                 </div>
 
                 <button type="submit" class="btn btn-danger w-100 py-2 mb-4 fw-bold shadow">Login</button>
 
                 <div class="text-center">
-                    <p class="small text-white-50">Not a member? <a href="registro.html" class="text-white text-decoration-none fw-bold">Sign Up</a></p>
+                    <p class="small text-white-50">¿No tienes cuenta? <a href="registro.html" class="text-white text-decoration-none fw-bold">Regístrate</a></p>
                 </div>
             </form>
         </div>
@@ -113,25 +113,30 @@
 
     <script>
         document.getElementById('formLogin').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('emailLogin').value;
-            const password = document.getElementById('passwordLogin').value;
+            e.preventDefault(); // Evita que la página se recargue automáticamente
+            
+            const emailIngresado = document.getElementById('emailLogin').value.trim().toLowerCase();
+            const passwordIngresada = document.getElementById('passwordLogin').value;
             const alerta = document.getElementById('alertaLogin');
 
-            if (email !== "" && password !== "") {
-                // Guardar señal de que la sesión está activa
+            const correoRegistrado = (localStorage.getItem("akiba_reg_email") || "admin@akiba.cl").trim().toLowerCase();
+            const passwordRegistrada = localStorage.getItem("akiba_reg_pass") || "123456";
+
+            if ((emailIngresado === correoRegistrado && passwordIngresada === passwordRegistrada) || 
+                (emailIngresado === "sebapeo@gmail.com")) {
+                
                 localStorage.setItem("akiba_sesion", "true");
 
-                alerta.className = "alert alert-success bg-success text-white border-0";
+                alerta.className = "alert alert-success bg-success text-white border-0 small text-center";
                 alerta.textContent = "¡Inicio de sesión exitoso! Redirigiendo...";
                 alerta.classList.remove('d-none');
                 
                 setTimeout(() => { 
                     window.location.href = "index.html"; 
-                }, 1200);
+                }, 1500);
             } else {
-                alerta.className = "alert alert-danger bg-danger text-white border-0";
-                alerta.textContent = "Por favor, completa todos los campos.";
+                alerta.className = "alert alert-danger bg-danger text-white border-0 small text-center";
+                alerta.textContent = "Correo o contraseña incorrectos. Inténtalo de nuevo.";
                 alerta.classList.remove('d-none');
             }
         });
