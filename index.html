@@ -45,7 +45,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* HERO SECTION CON VIDEO MP4 ADAPTADO */
+        /* HERO SECTION CON VIDEO DE FONDO */
         .hero-futurista {
             position: relative;
             background-color: #0b0f19;
@@ -57,7 +57,6 @@
             padding: 40px 0;
         }
 
-        /* Video MP4 adaptado desde la carpeta video/ */
         .hero-video-bg {
             position: absolute;
             top: 50%;
@@ -67,12 +66,11 @@
             width: auto;
             height: auto;
             transform: translate(-50%, -50%);
-            object-fit: cover; /* Clave para que se adapte sin deformarse */
+            object-fit: cover;
             z-index: 0;
             opacity: 0.65;
         }
 
-        /* Capa oscura superior para fundir el video con el diseño */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -156,7 +154,6 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link active text-primary fw-bold" href="index.html">INICIO</a></li>
                     
-                    <!-- MENÚ DESPLEGABLE CON CATEGORÍAS SEPARADAS -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
                             CATEGORÍAS
@@ -177,22 +174,22 @@
 
                 <form class="d-flex me-3" action="resultados.html" method="GET" role="search">
                     <input class="form-control form-control-sm me-2 bg-dark text-light border-secondary" type="search" name="q" placeholder="Buscar producto..." aria-label="Search" required>
-                    <button class="btn btn-outline-light btn-sm" type="submit">Buscar</button>
+                    <button class="btn btn-outline-light btn-sm rounded-pill px-3" type="submit">Buscar</button>
                 </form>
 
                 <div class="d-flex align-items-center gap-3" id="menuUsuario">
-                    <a href="login.html" class="btn btn-outline-warning btn-sm">
-                        <i class="bi bi-person-fill me-1"></i> Ingresar
+                    <a href="login.html" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="bi bi-person-fill me-1"></i> INGRESAR
                     </a>
-                    <a href="registro.html" class="btn btn-danger btn-sm">
-                        <i class="bi bi-person-plus-fill me-1"></i> Registro
+                    <a href="registro.html" class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm">
+                        <i class="bi bi-person-plus-fill me-1"></i> REGISTRO
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- 2. HERO SECTION CON VIDEO DESDE LA CARPETA VIDEO/ -->
+    <!-- 2. HERO SECTION CON VIDEO DE FONDO -->
     <header class="hero-futurista text-white text-center py-4 mb-4 border-bottom border-secondary">
         <video autoplay muted loop playsinline class="hero-video-bg">
             <source src="video/fondo.mp4" type="video/mp4">
@@ -249,7 +246,7 @@
         </div>
     </main>
 
-    <!-- WIDGET DE RADIO FLOTANTE -->
+    <!-- WIDGET DE RADIO FLOTANTE CON STREAM CHILENO DE ANIME -->
     <div id="radioWidget">
         <div id="radioPanel" class="radio-panel p-3">
             <div class="d-flex justify-content-between align-items-center mb-2 border-bottom border-secondary pb-2">
@@ -264,9 +261,9 @@
 
             <div class="mb-3">
                 <select id="selectEstacion" class="form-select form-select-sm bg-dark text-light border-secondary">
-                    <option value="https://icecast.omroep.nl/radio2-bb-mp3">Rock Clásico (Stream Live)</option>
-                    <option value="https://n08.radiojar.com/8s5u5tpw0k8uv">Anime & J-Rock Hits</option>
+                    <option value="https://stream.zeno.fm/qpn8mkt8c4duv">Anime Para Ti Radio (Chile - En Vivo)</option>
                     <option value="https://stream.zeno.fm/f3wvbbqmdg8uv">Lo-Fi & Chill Beats</option>
+                    <option value="https://icecast.omroep.nl/radio2-bb-mp3">Rock Clásico (Stream Live)</option>
                 </select>
             </div>
 
@@ -356,10 +353,10 @@
 
                 contenedorUsuario.innerHTML = `
                     <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-2 bg-secondary bg-opacity-25 py-1 px-3 rounded-pill border border-secondary" title="Editar Perfil">
-                        <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-danger object-fit-cover">
+                        <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-primary object-fit-cover">
                         <span class="fw-bold small">${nombreActual}</span>
                     </a>
-                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm">Cerrar Sesión</button>
+                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm rounded-pill">Cerrar Sesión</button>
                 `;
             }
         });
@@ -388,7 +385,9 @@
                 audioPlayer.play().then(() => {
                     reproduciendo = true;
                     actualizarUIActivo();
-                }).catch(err => alert("No se pudo conectar a la emisora."));
+                }).catch(err => {
+                    alert("No se pudo conectar a la emisora en este momento.");
+                });
             } else {
                 audioPlayer.pause();
                 audioPlayer.src = "";
