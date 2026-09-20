@@ -3,36 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akiba Store - Anime</title>
+    <title>Música (CD / Vinilo) - Akiba Store</title>
     
+    <!-- Google Fonts: Changa -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@700;800&display=swap" rel="stylesheet">
 
+    <!-- CSS local de Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
         body {
-            background-color: #212529;
+            background-color: #0b0f19;
             color: #f8f9fa;
         }
+        
         h1, h2, h3, .navbar-brand {
-            font-family: 'Dela Gothic One', sans-serif !important;
-            letter-spacing: 0.5px;
+            font-family: 'Changa', sans-serif !important;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .hover-danger:hover {
-            color: #dc3545 !important;
+
+        /* EFECTO DE ILUMINACIÓN AL PASAR EL CURSOR */
+        h1:hover, h2:hover, h3:hover, .navbar-brand:hover {
+            text-shadow: 0 0 15px rgba(13, 110, 253, 0.8), 0 0 30px rgba(13, 110, 253, 0.4);
+            transition: text-shadow 0.3s ease;
         }
+
         .hover-light:hover {
             color: #ffffff !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
-        .sidebar-filtros {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
+
+        /* Navbar estilo futurista */
+        .navbar-futurista {
+            background: rgba(11, 15, 25, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+
+        /* HERO SECTION CON VIDEO DE FONDO ADAPTADO */
+        .hero-futurista {
+            position: relative;
+            background-color: #0b0f19;
+            overflow: hidden;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 30%, rgba(13, 110, 253, 0.2) 0%, rgba(11, 15, 25, 0.88) 85%);
+            z-index: 1;
+        }
+
+        /* Tarjetas de productos con brillo al pasar el cursor */
+        .card {
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #0d6efd !important;
+            box-shadow: 0 0 25px rgba(13, 110, 253, 0.4);
+        }
+
+        /* Botón neón brillante */
+        .btn-neon {
+            background: linear-gradient(135deg, #0d6efd 0%, #0043a8 100%);
+            border: none;
+            color: #ffffff;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(13, 110, 253, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-neon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(13, 110, 253, 0.8);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Estilos de la Radio Flotante */
         #radioWidget {
             position: fixed;
             bottom: 25px;
@@ -44,7 +125,7 @@
             width: 320px;
             background: rgba(18, 18, 18, 0.98);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(220, 53, 69, 0.5);
+            border: 1px solid rgba(13, 110, 253, 0.4);
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
             overflow: hidden;
@@ -55,14 +136,14 @@
         }
     </style>
 </head>
-<body class="bg-dark text-light d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
 
-    <!-- BARRA DE NAVEGACIÓN -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-secondary">
+    <!-- 1. BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-futurista sticky-top border-bottom border-secondary">
         <div class="container">
             <a class="navbar-brand text-danger d-flex align-items-center gap-2" href="index.html">
                 <img src="img/logo.gif" alt="Logo Akiba Store" width="40" height="40" class="rounded-circle border border-danger object-fit-cover">
-                <span class="text-light">Akiba <span class="text-danger">Store</span></span>
+                <span class="text-light">Akiba <span class="text-primary">Store</span></span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -71,122 +152,105 @@
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link text-light" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-light hover-light" href="index.html">INICIO</a></li>
                     
-                    <!-- MENÚ DESPLEGABLE -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown">
-                            Categorías
+                        <a class="nav-link dropdown-toggle text-primary fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                            CATEGORÍAS
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
+                        <ul class="dropdown-menu dropdown-menu-dark border-secondary">
+                            <li><a class="dropdown-item active text-primary fw-bold" href="musica.html">Música (CD / Vinilo)</a></li>
                             <li><a class="dropdown-item" href="series.html">Series</a></li>
                             <li><a class="dropdown-item" href="peliculas.html">Películas</a></li>
-                            <li><a class="dropdown-item active text-danger fw-bold" href="anime.html">Anime</a></li>
+                            <li><a class="dropdown-item" href="anime.html">Anime</a></li>
                             <li><a class="dropdown-item" href="bluray.html">Blu-ray / DVD (General)</a></li>
                             <li><a class="dropdown-item" href="videojuegos.html">Videojuegos</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li><hr class="dropdown-divider border-secondary"></li>
                             <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-light" href="#">Catálogo Completo</a></li>
+                    <li class="nav-item"><a class="nav-link text-light hover-light" href="#">CATÁLOGO</a></li>
                 </ul>
 
-                <form class="d-flex me-3" role="search">
-                    <input class="form-control form-control-sm me-2 bg-dark text-light border-secondary" type="search" placeholder="Buscar anime..." aria-label="Search">
-                    <button class="btn btn-outline-light btn-sm" type="submit">Buscar</button>
+                <form class="d-flex me-3" action="resultados.html" method="GET" role="search">
+                    <input class="form-control form-control-sm me-2 bg-dark text-light border-secondary" type="search" name="q" placeholder="Buscar producto..." aria-label="Search" required>
+                    <button class="btn btn-outline-light btn-sm rounded-pill px-3" type="submit">Buscar</button>
                 </form>
 
                 <div class="d-flex align-items-center gap-3" id="menuUsuario">
-                    <a href="login.html" class="btn btn-outline-warning btn-sm">
-                        <i class="bi bi-person-fill me-1"></i> Ingresar
+                    <a href="login.html" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="bi bi-person-fill me-1"></i> INGRESAR
                     </a>
-                    <a href="registro.html" class="btn btn-danger btn-sm">
-                        <i class="bi bi-person-plus-fill me-1"></i> Registro
+                    <a href="registro.html" class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm">
+                        <i class="bi bi-person-plus-fill me-1"></i> REGISTRO
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- CABECERA DE LA CATEGORÍA -->
-    <header class="bg-black text-white text-center py-4 mb-4 border-bottom border-danger">
-        <div class="container">
-            <h1 class="display-6 text-danger mb-2"><i class="bi bi-collection-play me-2"></i>Anime en Formato Físico</h1>
-            <p class="text-white-50 small mb-0">Series completas, películas y OVAs de anime en Blu-ray y DVD.</p>
+    <!-- 2. HERO SECTION DE CATEGORÍA CON VIDEO DE FONDO Y FUENTE CHANGA -->
+    <header class="hero-futurista text-white text-center py-4 mb-4 border-bottom border-secondary">
+        <video autoplay muted loop playsinline class="hero-video-bg">
+            <source src="video/fondo.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="container position-relative z-2">
+            <h1 class="h2 text-white mb-2">Música: CD y Vinilos</h1>
+            <p class="small mb-3 text-light font-monospace" style="max-width: 550px; margin: 0 auto; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Siente la alta fidelidad y el formato físico de tus álbumes, bandas sonoras de anime y artistas favoritos.</p>
+            <a href="#productos" class="btn-neon btn-sm">VER DISCOS</a>
         </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL CON PANEL LATERAL -->
-    <main class="container mb-5 flex-grow-1">
-        <div class="row g-4">
-            
-            <!-- PRODUCTOS (Izquierda) -->
-            <div class="col-lg-8 order-2 order-lg-1">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted small">Mostrando Anime</span>
-                    <span class="badge bg-secondary">1 producto</span>
-                </div>
+    <!-- 3. SECCIÓN DE PRODUCTOS DE LA CATEGORÍA -->
+    <main class="container mb-5 flex-grow-1" id="productos">
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-5">
+                <h2 class="mb-0 text-light fs-3">CATÁLOGO DE MÚSICA</h2>
+            </div>
+        </div>
 
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
-                            <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 180px;">
-                                <i class="bi bi-film display-1 text-danger"></i>
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="card-title h6">Neon Genesis Evangelion - Box Set</h3>
-                                <p class="card-text text-muted small">Edición coleccionista en formato Blu-ray con audio dual y extras.</p>
-                                <div class="mt-auto">
-                                    <span class="fw-bold text-success fs-6">$29.990</span>
-                                    <button class="btn btn-danger w-100 btn-sm mt-2">Comprar</button>
-                                </div>
-                            </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
+                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 200px;">
+                        <i class="bi bi-disc display-1 text-warning"></i>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="card-title h5">Álbum Rock Clásico (Vinilo Remasterizado)</h3>
+                        <p class="card-text text-muted small">Edición coleccionista importada de alta fidelidad.</p>
+                        <div class="mt-auto">
+                            <span class="fw-bold text-success fs-5">$24.990</span>
+                            <button class="btn btn-outline-primary w-100 mt-2">Añadir al Carro</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- PANEL LATERAL DE FILTROS (Derecha) -->
-            <div class="col-lg-4 order-1 order-lg-2">
-                <div class="sidebar-filtros shadow-sm">
-                    <h5 class="text-danger fw-bold fs-6 mb-3 border-bottom border-secondary pb-2">
-                        <i class="bi bi-filter-right me-1"></i> Filtrar y Ordenar
-                    </h5>
-                    <div class="mb-3">
-                        <label class="form-label text-white-50 small fw-bold">Ordenar Alfabéticamente</label>
-                        <select class="form-select form-select-sm bg-dark text-light border-secondary shadow-none">
-                            <option value="az">De la A a la Z</option>
-                            <option value="za">De la Z a la A</option>
-                        </select>
+            <div class="col-md-4">
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
+                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 200px;">
+                        <i class="bi bi-music-note-list display-1 text-danger"></i>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label text-white-50 small fw-bold">Criterio Global</label>
-                        <select class="form-select form-select-sm bg-dark text-light border-secondary shadow-none">
-                            <option value="global">Lo más global / Tendencia</option>
-                            <option value="clasico">Lo más clásico / Edición Vintage</option>
-                        </select>
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="card-title h5">Anime OST Best Collection (CD)</h3>
+                        <p class="card-text text-muted small">Soundtrack oficial con booklet coleccionable.</p>
+                        <div class="mt-auto">
+                            <span class="fw-bold text-success fs-5">$18.990</span>
+                            <button class="btn btn-outline-primary w-100 mt-2">Añadir al Carro</button>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label text-white-50 small fw-bold">Rango de Precio</label>
-                        <select class="form-select form-select-sm bg-dark text-light border-secondary shadow-none">
-                            <option value="todos">Todos los precios</option>
-                            <option value="1">Menos de $20.000</option>
-                            <option value="2">Más de $20.000</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-outline-danger btn-sm w-100 fw-bold mt-2">Aplicar Filtros</button>
                 </div>
             </div>
-
         </div>
     </main>
 
-    <!-- WIDGET DE RADIO FLOTANTE -->
+    <!-- WIDGET DE RADIO FLOTANTE FUNCIONANDO EN TODAS LAS PÁGINAS -->
     <div id="radioWidget">
         <div id="radioPanel" class="radio-panel p-3">
             <div class="d-flex justify-content-between align-items-center mb-2 border-bottom border-secondary pb-2">
-                <span class="fw-bold text-danger small"><i class="bi bi-broadcast me-1"></i> AKIBA RADIO LIVE</span>
+                <span class="fw-bold text-primary small"><i class="bi bi-broadcast me-1"></i> AKIBA RADIO LIVE</span>
                 <button type="button" class="btn-close btn-close-white btn-sm" onclick="toggleRadioPanel()"></button>
             </div>
             
@@ -197,72 +261,106 @@
 
             <div class="mb-3">
                 <select id="selectEstacion" class="form-select form-select-sm bg-dark text-light border-secondary">
-                    <option value="https://icecast.omroep.nl/radio2-bb-mp3">Rock Clásico (Stream Live)</option>
-                    <option value="https://n08.radiojar.com/8s5u5tpw0k8uv">Anime & J-Rock Hits</option>
+                    <option value="https://stream.zeno.fm/qpn8mkt8c4duv">Anime Para Ti Radio (Chile - En Vivo)</option>
                     <option value="https://stream.zeno.fm/f3wvbbqmdg8uv">Lo-Fi & Chill Beats</option>
+                    <option value="https://icecast.omroep.nl/radio2-bb-mp3">Rock Clásico (Stream Live)</option>
                 </select>
             </div>
 
             <audio id="audioPlayer" preload="none"></audio>
 
             <div class="d-flex justify-content-center align-items-center gap-2">
-                <button id="btnPlayPause" class="btn btn-danger btn-sm w-100 fw-bold" onclick="controlarReproduccion()">
+                <button id="btnPlayPause" class="btn btn-primary btn-sm w-100 fw-bold shadow-sm" onclick="controlarReproduccion()">
                     <i class="bi bi-play-fill fs-5"></i> Reproducir
                 </button>
             </div>
         </div>
 
-        <button class="btn btn-danger rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" onclick="toggleRadioPanel()" title="Abrir Radio Akiba">
+        <button class="btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" onclick="toggleRadioPanel()" title="Abrir Radio Akiba">
             <i class="bi bi-music-note-beamed fs-3 text-white"></i>
         </button>
     </div>
 
-    <!-- FOOTER PROFESIONAL -->
+    <!-- 4. FOOTER PROFESIONAL -->
     <footer class="bg-black text-light pt-5 pb-3 border-top border-secondary mt-auto">
         <div class="container">
             <div class="row g-4 mb-4">
                 <div class="col-md-4">
-                    <h5 class="text-uppercase text-danger fw-bold mb-3" style="font-family: 'Dela Gothic One', sans-serif;">Akiba Store</h5>
-                    <p class="text-white-50 small mb-3">Tu tienda especializada en entretenimiento físico y artículos de colección.</p>
+                    <h5 class="text-uppercase text-primary fw-bold mb-3">Akiba Store</h5>
+                    <p class="text-white-50 small mb-3">Tu tienda especializada en entretenimiento físico y artículos de colección. Revive la nostalgia y lleva tu pasión al siguiente nivel.</p>
+                    <div class="d-flex gap-3 fs-5 text-light">
+                        <a href="#" class="text-light hover-light"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-light hover-light"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-light hover-light"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="text-light hover-light"><i class="bi bi-youtube"></i></a>
+                    </div>
                 </div>
+
                 <div class="col-md-4">
                     <h5 class="text-uppercase text-light fw-bold fs-6 mb-3">Información & Ayuda</h5>
                     <ul class="list-unstyled small text-white-50">
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Quienes somos</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Despachos y Envíos</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white-50 hover-light">Quienes somos</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white-50 hover-light">Encuéntranos aquí</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white-50 hover-light">Despachos y Envíos</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white-50 hover-light">Términos y condiciones</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-white-50 hover-light">Políticas de cambios y devoluciones</a></li>
                     </ul>
                 </div>
+
                 <div class="col-md-4">
-                    <h5 class="text-uppercase text-light fw-bold fs-6 mb-3">Pagos Seguros</h5>
-                    <div class="p-2 bg-dark rounded border border-secondary small text-white-50">
-                        <span>Webpay Plus / Redcompra / Bancos</span>
+                    <h5 class="text-uppercase text-light fw-bold fs-6 mb-3">Contacto Akiba</h5>
+                    <p class="mb-2 text-white-50 small"><i class="bi bi-envelope-fill me-2 text-primary"></i> contacto@akibastore.cl</p>
+                    <p class="mb-2 text-white-50 small"><i class="bi bi-geo-alt-fill me-2 text-primary"></i> Santiago, Chile</p>
+                    
+                    <div class="mt-4 p-3 bg-dark rounded border border-secondary">
+                        <p class="small text-white-50 mb-2 fw-bold">Paga seguro con tu banco:</p>
+                        <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
+                            <span class="badge bg-danger text-white">Redcompra</span>
+                            <span class="badge bg-primary text-white">Visa</span>
+                            <span class="badge bg-warning text-dark">Mastercard</span>
+                            <span class="badge bg-secondary text-white">Banco Estado</span>
+                            <span class="small text-white-50">+ y más</span>
+                        </div>
+                        <div class="mt-2 text-end">
+                            <span class="text-info fw-bold small" style="font-family: monospace;">webpay<span class="text-light">.PLUS</span></span>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <hr class="border-secondary">
-            <div class="text-center">
-                <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Creado por Seba.</p>
+
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Creado por Seba. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                    <span class="text-white-50 small">Desarrollado con Bootstrap 5 y tecnologías web modernas</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- SCRIPT DE RADIO Y SESIÓN -->
+    <!-- SCRIPT DE SESIÓN Y RADIO -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const sesionIniciada = localStorage.getItem("akiba_sesion");
             const contenedorUsuario = document.getElementById("menuUsuario");
+
             if (sesionIniciada === "true") {
                 const nombreActual = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
                 const avatarActual = localStorage.getItem("akiba_avatar") || "img/logo.gif";
+
                 contenedorUsuario.innerHTML = `
-                    <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-2 bg-secondary bg-opacity-25 py-1 px-3 rounded-pill border border-secondary">
-                        <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-danger object-fit-cover">
+                    <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-2 bg-secondary bg-opacity-25 py-1 px-3 rounded-pill border border-secondary" title="Editar Perfil">
+                        <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-primary object-fit-cover">
                         <span class="fw-bold small">${nombreActual}</span>
                     </a>
-                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm">Cerrar Sesión</button>
+                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm rounded-pill">Cerrar Sesión</button>
                 `;
             }
         });
+
         function cerrarSesion() {
             localStorage.removeItem("akiba_sesion");
             window.location.reload();
@@ -275,9 +373,11 @@
         const selectEstacion = document.getElementById("selectEstacion");
 
         let reproduciendo = false;
+
         function toggleRadioPanel() {
             document.getElementById("radioPanel").classList.toggle("active");
         }
+
         function controlarReproduccion() {
             if (!reproduciendo) {
                 let estacionActual = selectEstacion.value;
@@ -285,7 +385,9 @@
                 audioPlayer.play().then(() => {
                     reproduciendo = true;
                     actualizarUIActivo();
-                }).catch(err => alert("No se pudo conectar a la emisora."));
+                }).catch(err => {
+                    alert("No se pudo conectar a la emisora en este momento.");
+                });
             } else {
                 audioPlayer.pause();
                 audioPlayer.src = "";
@@ -293,12 +395,14 @@
                 actualizarUIPausa();
             }
         }
+
         function actualizarUIActivo() {
             btnPlayPause.innerHTML = `<i class="bi bi-pause-fill fs-5"></i> Pausar`;
             radioStatus.className = "badge bg-success mb-1";
             radioStatus.textContent = "EN VIVO";
             radioStationName.textContent = selectEstacion.options[selectEstacion.selectedIndex].text;
         }
+
         function actualizarUIPausa() {
             btnPlayPause.innerHTML = `<i class="bi bi-play-fill fs-5"></i> Reproducir`;
             radioStatus.className = "badge bg-secondary mb-1";

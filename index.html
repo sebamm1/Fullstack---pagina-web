@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akiba Store - Tienda de Entretenimiento Físico y Merchandising</title>
     
-    <!-- Google Fonts: Changa -->
+    <!-- Google Fonts: Changa y Dela Gothic One -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@700;800&family=Dela+Gothic+One&display=swap" rel="stylesheet">
 
     <!-- CSS local de Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,15 +20,89 @@
             color: #f8f9fa;
         }
         
-        h1, h2, h3, .navbar-brand {
+        /* Changa para el resto de títulos de la web */
+        h2, h3, .navbar-brand {
             font-family: 'Changa', sans-serif !important;
             font-weight: 800;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
-        /* EFECTO DE ILUMINACIÓN AL PASAR EL CURSOR */
-        h1:hover, h2:hover, h3:hover, .navbar-brand:hover {
+        /* CINTILLO SUPERIOR ANIMADO EN BUCLE */
+        .cintillo-animado-container {
+            background: linear-gradient(90deg, #d63384, #0d6efd);
+            color: #ffffff;
+            font-family: 'Changa', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            height: 38px;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1020;
+        }
+
+        .cintillo-track {
+            display: inline-flex;
+            animation: deslizarCintillo 25s linear infinite;
+        }
+
+        .cintillo-track:hover {
+            animation-play-state: paused;
+        }
+
+        .cintillo-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 40px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+        @keyframes deslizarCintillo {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* TÍTULO INTERACTIVO CON EVITACIÓN DE SELECCIÓN DE TEXTO */
+        .hero-titulo-especial {
+            font-family: 'Dela Gothic One', sans-serif !important;
+            letter-spacing: 2px;
+            font-size: 2.8rem;
+            cursor: pointer;
+            transition: text-shadow 0.3s ease, transform 0.1s ease;
+            display: inline-block;
+            
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .hero-titulo-especial:hover {
+            text-shadow: 0 0 20px rgba(13, 110, 253, 0.9), 0 0 40px rgba(13, 110, 253, 0.5);
+        }
+
+        /* ANIMACIÓN DE TEMBLOR AL HACER CLIC */
+        @keyframes temblor-anim {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-3px, 3px) rotate(-1deg); }
+            40% { transform: translate(3px, -2px) rotate(1deg); }
+            60% { transform: translate(-3px, -2px) rotate(0deg); }
+            80% { transform: translate(2px, 2px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .temblando {
+            animation: temblor-anim 0.2s ease infinite;
+        }
+
+        /* EFECTO DE ILUMINACIÓN GENERAL PARA OTROS TÍTULOS */
+        h2:hover, h3:hover, .navbar-brand:hover {
             text-shadow: 0 0 15px rgba(13, 110, 253, 0.8), 0 0 30px rgba(13, 110, 253, 0.4);
             transition: text-shadow 0.3s ease;
         }
@@ -40,12 +114,12 @@
 
         /* Navbar estilo futurista */
         .navbar-futurista {
-            background: rgba(11, 15, 25, 0.9) !important;
+            background: rgba(11, 15, 25, 0.95) !important;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* HERO SECTION CON VIDEO DE FONDO */
+        /* HERO SECTION DEL INICIO */
         .hero-futurista {
             position: relative;
             background-color: #0b0f19;
@@ -68,7 +142,7 @@
             transform: translate(-50%, -50%);
             object-fit: cover;
             z-index: 0;
-            opacity: 0.65;
+            opacity: 0.5;
         }
 
         .hero-overlay {
@@ -77,11 +151,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 30%, rgba(13, 110, 253, 0.2) 0%, rgba(11, 15, 25, 0.88) 85%);
+            background: radial-gradient(circle at 50% 30%, rgba(13, 110, 253, 0.25) 0%, rgba(11, 15, 25, 0.95) 80%);
             z-index: 1;
         }
 
-        /* Tarjetas de productos con brillo al pasar el cursor */
+        .hero-subtítulo {
+            color: #ffffff !important;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Tarjetas de productos con brillo */
         .card {
             transition: all 0.3s ease;
         }
@@ -138,6 +218,23 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
+    <!-- CINTILLO SUPERIOR ANIMADO EN BUCLE -->
+    <div class="cintillo-animado-container">
+        <div class="cintillo-track">
+            <div class="cintillo-item"><i class="bi bi-controller me-2"></i> ¡TODO EN FORMATO FÍSICO Y COLECCIONABLES!</div>
+            <div class="cintillo-item"><i class="bi bi-truck me-2"></i> DESPACHOS A TODO CHILE</div>
+            <div class="cintillo-item"><i class="bi bi-credit-card-2-front-fill me-2"></i> PAGA HASTA 6 CUOTAS SIN INTERÉS CON WEBPAY</div>
+            <div class="cintillo-item"><i class="bi bi-broadcast me-2"></i> ESCUCHA AKIBA RADIO LIVE EN VIVO</div>
+            <div class="cintillo-item"><i class="bi bi-gift-fill me-2"></i> 5% DCTO EXTRA EN TU PRIMERA COMPRA</div>
+            
+            <div class="cintillo-item"><i class="bi bi-controller me-2"></i> ¡TODO EN FORMATO FÍSICO Y COLECCIONABLES!</div>
+            <div class="cintillo-item"><i class="bi bi-truck me-2"></i> DESPACHOS A TODO CHILE</div>
+            <div class="cintillo-item"><i class="bi bi-credit-card-2-front-fill me-2"></i> PAGA HASTA 6 CUOTAS SIN INTERÉS CON WEBPAY</div>
+            <div class="cintillo-item"><i class="bi bi-broadcast me-2"></i> ESCUCHA AKIBA RADIO LIVE EN VIVO</div>
+            <div class="cintillo-item"><i class="bi bi-gift-fill me-2"></i> 5% DCTO EXTRA EN TU PRIMERA COMPRA</div>
+        </div>
+    </div>
+
     <!-- 1. BARRA DE NAVEGACIÓN -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-futurista sticky-top border-bottom border-secondary">
         <div class="container">
@@ -189,7 +286,7 @@
         </div>
     </nav>
 
-    <!-- 2. HERO SECTION CON VIDEO DE FONDO -->
+    <!-- 2. HERO SECTION DEL INICIO -->
     <header class="hero-futurista text-white text-center py-4 mb-4 border-bottom border-secondary">
         <video autoplay muted loop playsinline class="hero-video-bg">
             <source src="video/fondo.mp4" type="video/mp4">
@@ -198,8 +295,8 @@
         <div class="hero-overlay"></div>
 
         <div class="container position-relative z-2">
-            <h1 class="h2 text-white mb-2">AKIBA STORE</h1>
-            <p class="small mb-3 text-light font-monospace" style="max-width: 550px; margin: 0 auto; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">El poder del formato físico. Colecciona discos, películas, series, anime, videojuegos y artículos exclusivos con la mejor calidad.</p>
+            <h1 id="tituloAkiba" class="hero-titulo-especial text-white mb-2">AKIBA STORE</h1>
+            <p class="small mb-3 font-monospace hero-subtítulo" style="max-width: 550px; margin: 0 auto;">El poder del formato físico. Colecciona discos, películas, series, anime, videojuegos y artículos exclusivos con la mejor calidad.</p>
             <a href="#catalogo" class="btn-neon btn-sm">EXPLORAR CATÁLOGO</a>
         </div>
     </header>
@@ -246,7 +343,7 @@
         </div>
     </main>
 
-    <!-- WIDGET DE RADIO FLOTANTE CON STREAM CHILENO DE ANIME -->
+    <!-- WIDGET DE RADIO FLOTANTE -->
     <div id="radioWidget">
         <div id="radioPanel" class="radio-panel p-3">
             <div class="d-flex justify-content-between align-items-center mb-2 border-bottom border-secondary pb-2">
@@ -260,9 +357,10 @@
             </div>
 
             <div class="mb-3">
-                <select id="selectEstacion" class="form-select form-select-sm bg-dark text-light border-secondary">
+                <select id="selectEstacion" class="form-select form-select-sm bg-dark text-light border-secondary" onchange="cambiarEstacion()">
                     <option value="https://stream.zeno.fm/qpn8mkt8c4duv">Anime Para Ti Radio (Chile - En Vivo)</option>
-                    <option value="https://stream.zeno.fm/f3wvbbqmdg8uv">Lo-Fi & Chill Beats</option>
+                    <option value="http://stream.zeno.fm/8wup8yd9dm0uv">100% Reggaeton Radio (En Vivo)</option>
+                    <option value="https://stream.zeno.fm/f3wvbbqmdg8uv">Lo-Fi & Chill Beats (En Vivo)</option>
                     <option value="https://icecast.omroep.nl/radio2-bb-mp3">Rock Clásico (Stream Live)</option>
                 </select>
             </div>
@@ -341,7 +439,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE SESIÓN Y RADIO -->
+    <!-- SCRIPT DE SESIÓN, RADIO Y TEMBLOR DEL TÍTULO -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const sesionIniciada = localStorage.getItem("akiba_sesion");
@@ -366,6 +464,22 @@
             window.location.reload();
         }
 
+        // Efecto de temblor acumulativo al hacer clic en AKIBA STORE sin seleccionar texto
+        const tituloAkiba = document.getElementById("tituloAkiba");
+        let tiempoTemblor = null;
+
+        tituloAkiba.addEventListener("click", function(e) {
+            e.preventDefault();
+            tituloAkiba.classList.add("temblando");
+            
+            clearTimeout(tiempoTemblor);
+            
+            tiempoTemblor = setTimeout(() => {
+                tituloAkiba.classList.remove("temblando");
+            }, 600);
+        });
+
+        // Configuración de la Radio
         const audioPlayer = document.getElementById("audioPlayer");
         const btnPlayPause = document.getElementById("btnPlayPause");
         const radioStatus = document.getElementById("radioStatus");
@@ -393,6 +507,18 @@
                 audioPlayer.src = "";
                 reproduciendo = false;
                 actualizarUIPausa();
+            }
+        }
+
+        function cambiarEstacion() {
+            if (reproduciendo) {
+                let estacionActual = selectEstacion.value;
+                audioPlayer.src = estacionActual;
+                audioPlayer.play().then(() => {
+                    actualizarUIActivo();
+                }).catch(err => {
+                    alert("No se pudo conectar a esta emisora.");
+                });
             }
         }
 
