@@ -161,7 +161,7 @@
 
                 <!-- Alerta personalizada elegante -->
                 <div id="alertaLogin" class="alert alert-success mensaje-flotante text-center mb-3" role="alert">
-                    <i class="bi bi-check-circle-fill me-2"></i> ¡Bienvenido de vuelta a Akiba Store!
+                    <i class="bi bi-check-circle-fill me-2"></i> <span id="textoAlerta">¡Bienvenido de vuelta a Akiba Store!</span>
                 </div>
 
                 <form id="formLogin">
@@ -191,22 +191,38 @@
         </div>
     </section>
 
-    <!-- SCRIPT DE LOGIN CON MENSAJE PERSONALIZADO -->
+    <!-- SCRIPT DE LOGIN CON VALIDACIÓN ESTRICTA DE ADMIN -->
     <script>
         document.getElementById("formLogin").addEventListener("submit", function(e) {
             e.preventDefault();
             
-            // Guardamos la sesión y nombre por defecto si no existen
-            localStorage.setItem("akiba_sesion", "true");
-            if (!localStorage.getItem("akiba_nombre")) {
-                localStorage.setItem("akiba_nombre", "sebapeo");
-            }
-            if (!localStorage.getItem("akiba_avatar")) {
+            const emailInput = document.getElementById("emailLogin").value.trim().toLowerCase();
+            const passwordInput = document.getElementById("passwordLogin").value;
+            const alerta = document.getElementById("alertaLogin");
+            const textoAlerta = document.getElementById("textoAlerta");
+
+            // Validar credenciales de Administrador exactas
+            if (emailInput === "admin@akibastore.cl" && passwordInput === "admin123") {
+                localStorage.setItem("akiba_sesion", "true");
+                localStorage.setItem("akiba_nombre", "Seba Admin");
+                localStorage.setItem("akiba_correo", "admin@akibastore.cl");
+                localStorage.setItem("akiba_es_admin", "true"); // ¡Activa el rol de administrador!
                 localStorage.setItem("akiba_avatar", "img/logo.gif");
+                
+                textoAlerta.textContent = "¡Bienvenido, Administrador!";
+                alerta.className = "alert alert-warning mensaje-flotante text-center mb-3 fw-bold";
+            } else {
+                // Usuario Normal
+                localStorage.setItem("akiba_sesion", "true");
+                localStorage.setItem("akiba_nombre", emailInput.split('@')[0]); // Usa la parte del correo como nombre
+                localStorage.setItem("akiba_correo", emailInput);
+                localStorage.removeItem("akiba_es_admin"); // Se asegura de que no sea admin
+                localStorage.setItem("akiba_avatar", "img/logo.gif");
+
+                textoAlerta.textContent = "¡Bienvenido de vuelta a Akiba Store!";
+                alerta.className = "alert alert-success mensaje-flotante text-center mb-3";
             }
 
-            // Mostrar alerta personalizada elegante
-            const alerta = document.getElementById("alertaLogin");
             alerta.style.display = "block";
 
             // Redirigir al inicio después de 1.2 segundos

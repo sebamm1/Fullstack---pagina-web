@@ -20,7 +20,7 @@
             color: #f8f9fa;
         }
         
-        /* Changa para el resto de títulos de la web */
+        /* Changa para títulos */
         h2, h3, .navbar-brand {
             font-family: 'Changa', sans-serif !important;
             font-weight: 800;
@@ -101,7 +101,6 @@
             animation: temblor-anim 0.2s ease infinite;
         }
 
-        /* EFECTO DE ILUMINACIÓN GENERAL PARA OTROS TÍTULOS */
         h2:hover, h3:hover, .navbar-brand:hover {
             text-shadow: 0 0 15px rgba(13, 110, 253, 0.8), 0 0 30px rgba(13, 110, 253, 0.4);
             transition: text-shadow 0.3s ease;
@@ -112,14 +111,41 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
-        /* Navbar estilo futurista */
+        /* NAVBAR 100% TRANSLÚCIDA Y MODERNA FORZADA */
         .navbar-futurista {
-            background: rgba(11, 15, 25, 0.95) !important;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(11, 15, 25, 0.3) !important;
+            backdrop-filter: blur(18px) !important;
+            -webkit-backdrop-filter: blur(18px) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
-        /* HERO SECTION DEL INICIO */
+        /* CÁPSULA DE ADMINISTRADOR ESTILO DISCORD ULTRATRANSPARENTE */
+        .admin-discord-profile {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(111, 66, 193, 0.25)) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 2px solid rgba(255, 193, 7, 0.85) !important;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.35), inset 0 0 10px rgba(220, 53, 69, 0.2);
+            padding: 5px 16px 5px 6px !important;
+            border-radius: 50rem !important;
+            animation: adminGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes adminGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 193, 7, 0.3), inset 0 0 5px rgba(220, 53, 69, 0.2); }
+            100% { box-shadow: 0 0 22px rgba(255, 193, 7, 0.75), inset 0 0 12px rgba(255, 193, 7, 0.4); }
+        }
+
+        .admin-badge-text {
+            color: #ffc107 !important;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 8px rgba(255, 193, 7, 0.7);
+        }
+
+        /* HERO SECTION DEL INICIO CON VIDEO */
         .hero-futurista {
             position: relative;
             background-color: #0b0f19;
@@ -161,7 +187,7 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
-        /* CONTENEDOR DE LA IMAGEN "PRODUCTOS" CON SEPARACIÓN Y ESTILO ELEGANTE */
+        /* CONTENEDOR DE LA IMAGEN "PRODUCTOS" CON SEPARACIÓN */
         .seccion-productos-img {
             max-width: 1100px;
             margin: 40px auto 20px auto;
@@ -209,7 +235,7 @@
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
-        /* Estilos de la Radio Flotante (Abajo a la Derecha) */
+        /* Estilos de la Radio Flotante */
         #radioWidget {
             position: fixed;
             bottom: 25px;
@@ -256,7 +282,7 @@
             100% { transform: scaleY(1.3); }
         }
 
-        /* BOTÓN FLOTANTE DE REGALO (Abajo a la Izquierda) */
+        /* BOTÓN FLOTANTE DE REGALO */
         #ruletaWidget {
             position: fixed;
             bottom: 25px;
@@ -346,7 +372,7 @@
         </div>
     </div>
 
-    <!-- 1. BARRA DE NAVEGACIÓN -->
+    <!-- 1. BARRA DE NAVEGACIÓN MODERNA Y TRANSLÚCIDA -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-futurista sticky-top border-bottom border-secondary">
         <div class="container">
             <a class="navbar-brand text-danger d-flex align-items-center gap-2" href="index.html">
@@ -377,7 +403,6 @@
                             <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-light hover-light" href="#">CATÁLOGO</a></li>
                 </ul>
 
                 <form class="d-flex me-3" action="resultados.html" method="GET" role="search">
@@ -385,7 +410,7 @@
                     <button class="btn btn-outline-light btn-sm rounded-pill px-3" type="submit">Buscar</button>
                 </form>
 
-                <div class="d-flex align-items-center gap-3" id="menuUsuario">
+                <div class="d-flex align-items-center gap-2" id="menuUsuario">
                     <a href="login.html" class="btn btn-outline-light btn-sm rounded-pill px-3">
                         <i class="bi bi-person-fill me-1"></i> INGRESAR
                     </a>
@@ -408,7 +433,6 @@
         <div class="container position-relative z-2">
             <h1 id="tituloAkiba" class="hero-titulo-especial text-white mb-2">AKIBA STORE</h1>
             <p class="small mb-3 font-monospace hero-subtítulo" style="max-width: 550px; margin: 0 auto;">El poder del formato físico. Colecciona discos, películas, series, anime, videojuegos y artículos exclusivos con la mejor calidad.</p>
-            <a href="#catalogo" class="btn-neon btn-sm">EXPLORAR CATÁLOGO</a>
         </div>
     </header>
 
@@ -474,7 +498,7 @@
         </div>
     </main>
 
-    <!-- BOTÓN FLOTANTE DE REGALO (Abajo a la Izquierda) -->
+    <!-- BOTÓN FLOTANTE DE REGALO -->
     <div id="ruletaWidget">
         <button class="btn btn-danger rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" onclick="toggleRuletaModal()" title="Ruleta de Premios Akiba">
             <i class="bi bi-gift-fill fs-3 text-white"></i>
@@ -505,7 +529,7 @@
         </div>
     </div>
 
-    <!-- WIDGET DE RADIO FLOTANTE CON ECUALIZADOR (Abajo a la Derecha) -->
+    <!-- WIDGET DE RADIO FLOTANTE -->
     <div id="radioWidget">
         <div id="radioPanel" class="radio-panel p-3">
             <div class="d-flex justify-content-between align-items-center mb-2 border-bottom border-secondary pb-2">
@@ -520,10 +544,9 @@
 
             <div class="mb-3">
                 <select id="selectEstacion" class="form-select form-select-sm bg-dark text-light border-secondary" onchange="cambiarEstacion()">
-                    <option value="https://stream.zeno.fm/qpn8mkt8c4duv">Anime Para Ti Radio (Chile - En Vivo)</option>
-                    <option value="http://stream.zeno.fm/8wup8yd9dm0uv">100% Reggaeton Radio (En Vivo)</option>
-                    <option value="https://stream.zeno.fm/f3wvbbqmdg8uv">Lo-Fi & Chill Beats (En Vivo)</option>
-                    <option value="https://icecast.omroep.nl/radio2-bb-mp3">Rock Clásico (Stream Live)</option>
+                    <option value="https://stream.zeno.fm/f3wvbbqmdg8uv">Lo-Fi & Chill Beats (Stream HD)</option>
+                    <option value="https://icecast.omroep.nl/radio2-bb-mp3">Rock Clásico Internacional</option>
+                    <option value="https://playerservices.streamtheworld.com/api/livestream-redirect/CONCIERTO.mp3">Radio Concierto Chile (En Vivo)</option>
                 </select>
             </div>
 
@@ -607,7 +630,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE SESIÓN, RADIO CON ECUALIZADOR Y RULETA -->
+    <!-- SCRIPT DE SESIÓN Y VALIDADOR DE ADMIN -->
     <script>
         const premios = [
             { texto: "35% DCTO", mensaje: "¡Ganaste 35% DCTO!", color: "#dc3545" },
@@ -625,14 +648,33 @@
             if (sesionIniciada === "true") {
                 const nombreActual = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
                 const avatarActual = localStorage.getItem("akiba_avatar") || "img/logo.gif";
+                const correoActual = localStorage.getItem("akiba_correo") || "";
+                
+                const esAdmin = (localStorage.getItem("akiba_es_admin") === "true" || correoActual.toLowerCase() === "admin@akibastore.cl");
 
-                contenedorUsuario.innerHTML = `
-                    <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-2 bg-secondary bg-opacity-25 py-1 px-3 rounded-pill border border-secondary" title="Editar Perfil">
-                        <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-primary object-fit-cover">
-                        <span class="fw-bold small">${nombreActual}</span>
-                    </a>
-                    <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm rounded-pill">Cerrar Sesión</button>
-                `;
+                if (esAdmin) {
+                    contenedorUsuario.innerHTML = `
+                        <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-3 admin-discord-profile" title="Administrador Principal - Rango SSS">
+                            <div class="position-relative d-flex align-items-center">
+                                <img src="${avatarActual}" alt="Avatar Admin" width="38" height="38" class="rounded-circle border border-warning object-fit-cover shadow-sm">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-warning text-dark p-1 d-flex align-items-center justify-content-center shadow" style="width: 18px; height: 18px; font-size: 10px;" title="👑 Owner / Admin">👑</span>
+                            </div>
+                            <div class="d-flex flex-column pe-1">
+                                <span class="admin-badge-text">${nombreActual}</span>
+                                <span class="text-warning font-monospace" style="font-size: 10px; letter-spacing: 1px;">[ADMINISTRADOR]</span>
+                            </div>
+                        </a>
+                        <button onclick="cerrarSesion()" class="btn btn-outline-danger btn-sm rounded-pill fw-bold px-3">Salir</button>
+                    `;
+                } else {
+                    contenedorUsuario.innerHTML = `
+                        <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-2 rounded-pill py-1 px-3" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12);" title="Editar Perfil">
+                            <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-primary object-fit-cover">
+                            <span class="fw-bold small">${nombreActual}</span>
+                        </a>
+                        <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm rounded-pill">Cerrar Sesión</button>
+                    `;
+                }
             }
 
             dibujarRuletaCanvas();
@@ -641,6 +683,10 @@
 
         function cerrarSesion() {
             localStorage.removeItem("akiba_sesion");
+            localStorage.removeItem("akiba_es_admin");
+            localStorage.removeItem("akiba_nombre");
+            localStorage.removeItem("akiba_correo");
+            localStorage.removeItem("akiba_avatar");
             window.location.reload();
         }
 
@@ -777,7 +823,7 @@
             }, 4000);
         }
 
-        // Configuración de la Radio
+        // Configuración de la Radio Mejorada
         const audioPlayer = document.getElementById("audioPlayer");
         const btnPlayPause = document.getElementById("btnPlayPause");
         const radioStatus = document.getElementById("radioStatus");
@@ -795,14 +841,7 @@
 
         function controlarReproduccion() {
             if (!reproduciendo) {
-                let estacionActual = selectEstacion.value;
-                audioPlayer.src = estacionActual;
-                audioPlayer.play().then(() => {
-                    reproduciendo = true;
-                    actualizarUIActivo();
-                }).catch(err => {
-                    alert("No se pudo conectar a la emisora en este momento.");
-                });
+                iniciarReproduccion();
             } else {
                 audioPlayer.pause();
                 audioPlayer.src = "";
@@ -813,15 +852,35 @@
 
         function cambiarEstacion() {
             if (reproduciendo) {
-                let estacionActual = selectEstacion.value;
-                audioPlayer.src = estacionActual;
-                audioPlayer.play().then(() => {
-                    actualizarUIActivo();
-                }).catch(err => {
-                    alert("No se pudo conectar a esta emisora.");
-                });
+                iniciarReproduccion();
             }
         }
+
+        function iniciarReproduccion() {
+            let estacionActual = selectEstacion.value;
+            audioPlayer.src = estacionActual;
+            audioPlayer.load();
+            
+            audioPlayer.play().then(() => {
+                reproduciendo = true;
+                actualizarUIActivo();
+            }).catch(err => {
+                radioStatus.className = "badge bg-danger mb-1";
+                radioStatus.textContent = "Error de señal";
+                radioStationName.textContent = "Prueba con otra emisora";
+                reproduciendo = false;
+            });
+        }
+
+        // Manejador por si falla la carga del streaming
+        audioPlayer.onerror = function() {
+            if (reproduciendo) {
+                radioStatus.className = "badge bg-danger mb-1";
+                radioStatus.textContent = "Sin conexión al stream";
+                radioStationName.textContent = "Selecciona otra opción";
+                actualizarUIPausa();
+            }
+        };
 
         function actualizarUIActivo() {
             btnPlayPause.innerHTML = `<i class="bi bi-pause-fill fs-5"></i> Pausar`;
@@ -835,10 +894,12 @@
         }
 
         function actualizarUIPausa() {
-            btnPlayPause.innerHTML = `<i class="bi bi-pause-fill fs-5"></i> Reproducir`;
-            radioStatus.className = "badge bg-secondary mb-1";
-            radioStatus.textContent = "Radio en pausa";
-            radioStationName.textContent = "Selecciona una emisora";
+            btnPlayPause.innerHTML = `<i class="bi bi-play-fill fs-5"></i> Reproducir`;
+            if (radioStatus.textContent !== "Error de señal" && radioStatus.textContent !== "Sin conexión al stream") {
+                radioStatus.className = "badge bg-secondary mb-1";
+                radioStatus.textContent = "Radio en pausa";
+                radioStationName.textContent = "Selecciona una emisora";
+            }
 
             iconoEq.classList.remove("playing");
             iconoEq.style.display = "none";
