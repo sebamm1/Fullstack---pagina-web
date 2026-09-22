@@ -385,14 +385,14 @@
             </button>
             
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav me-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link active text-primary fw-bold" href="index.html">INICIO</a></li>
                     
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
                             CATEGORÍAS
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark border-secondary">
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-secondary">
                             <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
                             <li><a class="dropdown-item" href="series.html">Series</a></li>
                             <li><a class="dropdown-item" href="peliculas.html">Películas</a></li>
@@ -403,6 +403,9 @@
                             <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising</a></li>
                         </ul>
                     </li>
+
+                    <!-- Botón Panel Admin (Dinámico para Admin) -->
+                    <div id="enlaceAdminContainer" class="d-inline-block"></div>
                 </ul>
 
                 <form class="d-flex me-3" action="resultados.html" method="GET" role="search">
@@ -644,6 +647,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const sesionIniciada = localStorage.getItem("akiba_sesion");
             const contenedorUsuario = document.getElementById("menuUsuario");
+            const enlaceAdminContainer = document.getElementById("enlaceAdminContainer");
 
             if (sesionIniciada === "true") {
                 const nombreActual = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
@@ -653,6 +657,15 @@
                 const esAdmin = (localStorage.getItem("akiba_es_admin") === "true" || correoActual.toLowerCase() === "admin@akibastore.cl");
 
                 if (esAdmin) {
+                    // Mostrar enlace de Panel Admin en el Navbar
+                    enlaceAdminContainer.innerHTML = `
+                        <li class="nav-item ms-lg-2">
+                            <a class="nav-link text-warning fw-bold border border-warning border-opacity-50 rounded-pill px-3 py-1 shadow-sm d-flex align-items-center gap-1" href="admin.html">
+                                <i class="bi bi-speedometer2"></i> Panel Admin
+                            </a>
+                        </li>
+                    `;
+
                     contenedorUsuario.innerHTML = `
                         <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-3 admin-discord-profile" title="Administrador Principal - Rango SSS">
                             <div class="position-relative d-flex align-items-center">
@@ -667,6 +680,7 @@
                         <button onclick="cerrarSesion()" class="btn btn-outline-danger btn-sm rounded-pill fw-bold px-3">Salir</button>
                     `;
                 } else {
+                    enlaceAdminContainer.innerHTML = "";
                     contenedorUsuario.innerHTML = `
                         <a href="perfil.html" class="d-flex align-items-center text-decoration-none text-light gap-2 rounded-pill py-1 px-3" style="background: rgba(255,255,255,0.06); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12);" title="Editar Perfil">
                             <img src="${avatarActual}" alt="Avatar" width="32" height="32" class="rounded-circle border border-primary object-fit-cover">
@@ -675,6 +689,8 @@
                         <button onclick="cerrarSesion()" class="btn btn-outline-light btn-sm rounded-pill">Cerrar Sesión</button>
                     `;
                 }
+            } else {
+                enlaceAdminContainer.innerHTML = "";
             }
 
             dibujarRuletaCanvas();
@@ -872,7 +888,6 @@
             });
         }
 
-        // Manejador por si falla la carga del streaming
         audioPlayer.onerror = function() {
             if (reproduciendo) {
                 radioStatus.className = "badge bg-danger mb-1";
