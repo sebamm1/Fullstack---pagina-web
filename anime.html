@@ -155,23 +155,25 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link text-light hover-light" href="index.html">Inicio</a></li>
                     
-                   <li class="nav-item dropdown">
-    <!-- Se mantiene el dropdown-toggle -->
-    <a class="nav-link dropdown-toggle text-light active fw-bold text-danger" href="#" role="button" data-bs-toggle="dropdown">
-        Categorías
-    </a>
-    <!-- AQUÍ ESTÁ EL CAMBIO: Se agrega "dropdown-menu-end" para que se alinee/gire hacia la izquierda -->
-    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-secondary">
-        <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
-        <li><a class="dropdown-item" href="series.html">Series</a></li>
-        <li><a class="dropdown-item" href="peliculas.html">Películas</a></li>
-        <li><a class="dropdown-item" href="anime.html">Anime</a></li>
-        <li><a class="dropdown-item" href="bluray.html">Blu-ray / DVD (General)</a></li>
-        <li><a class="dropdown-item" href="videojuegos.html">Videojuegos</a></li>
-        <li><hr class="dropdown-divider border-secondary"></li>
-        <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising</a></li>
-    </ul>
-</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light active fw-bold text-danger" href="#" role="button" data-bs-toggle="dropdown">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end border-secondary">
+                            <li><a class="dropdown-item" href="musica.html">Música (CD / Vinilo)</a></li>
+                            <li><a class="dropdown-item" href="series.html">Series</a></li>
+                            <li><a class="dropdown-item" href="peliculas.html">Películas</a></li>
+                            <li><a class="dropdown-item active" href="anime.html">Anime</a></li>
+                            <li><a class="dropdown-item" href="bluray.html">Blu-ray / DVD (General)</a></li>
+                            <li><a class="dropdown-item" href="videojuegos.html">Videojuegos</a></li>
+                            <li><hr class="dropdown-divider border-secondary"></li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="merchandising.html">Merchandising</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="carrito.html"><i class="bi bi-cart-fill me-1"></i> Carrito</a>
+                    </li>
                 </ul>
 
                 <form class="d-flex me-3" action="resultados.html" method="GET" role="search">
@@ -221,7 +223,8 @@
                                 <p class="card-text text-muted small">Serie completa remasterizada en alta definición con extras.</p>
                                 <div class="mt-auto">
                                     <span class="fw-bold text-success fs-5">$32.990</span>
-                                    <button class="btn btn-neon-danger w-100 mt-3 py-2 rounded-pill">Comprar</button>
+                                    <!-- Botón conectado a la función directa -->
+                                    <button class="btn btn-neon-danger w-100 mt-3 py-2 rounded-pill" onclick="comprarAnimeDirecto()">Comprar</button>
                                 </div>
                             </div>
                         </div>
@@ -317,8 +320,29 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE SESIÓN Y RADIO -->
+    <!-- SCRIPT DE COMPRA, SESIÓN Y RADIO -->
     <script>
+        // Función directa para comprar y redirigir al carrito
+        function comprarAnimeDirecto() {
+            const producto = {
+                nombre: "Box Set Anime Edición Coleccionista",
+                precio: 32990,
+                cantidad: 1
+            };
+
+            let carrito = JSON.parse(localStorage.getItem('akiba_carrito')) || [];
+            
+            let index = carrito.findIndex(item => item.nombre === producto.nombre);
+            if (index !== -1) {
+                carrito[index].cantidad += 1;
+            } else {
+                carrito.push(producto);
+            }
+
+            localStorage.setItem('akiba_carrito', JSON.stringify(carrito));
+            window.location.href = "carrito.html";
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const sesionIniciada = localStorage.getItem("akiba_sesion");
             const contenedorUsuario = document.getElementById("menuUsuario");

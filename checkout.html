@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Pago - Checkout</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/miestilo.css">
+    <style>
+        body { background-color: #0b0f19; color: #f8f9fa; }
+        h2, h4, .navbar-brand { font-family: 'Changa', sans-serif !important; font-weight: 800; }
+        .card-checkout {
+            background: rgba(18, 22, 33, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(13, 110, 253, 0.3);
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<div class="container mt-5 mb-5 flex-grow-1">
+    <h2 class="text-light">Checkout</h2>
+    <p class="text-muted">Completa tus datos para finalizar la compra segura con Webpay.</p>
+    
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="card card-checkout p-4 shadow-sm text-light">
+                <h4 class="mb-3 text-primary">Dirección de Envío</h4>
+                <form id="formulario-compra" onsubmit="simularCompra(event)">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="nombre" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="apellido" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control bg-dark text-light border-secondary" id="direccion" placeholder="Calle Principal 123" required>
+                    </div>
+                    
+                    <hr class="border-secondary my-4">
+                    
+                    <h4 class="mb-3 text-primary">Método de Pago</h4>
+                    <div class="form-check mb-2">
+                        <input id="credito" name="metodoPago" type="radio" class="form-check-input" checked required>
+                        <label class="form-check-label" for="credito">Tarjeta de Crédito / Débito (Webpay Plus)</label>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="cc-nombre" class="form-label">Nombre en la tarjeta</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="cc-nombre" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cc-numero" class="form-label">Número de tarjeta</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="cc-numero" placeholder="4500 •••• •••• 1234" required>
+                        </div>
+                    </div>
+
+                    <hr class="border-secondary my-4">
+                    <button class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow" type="submit">Finalizar y Pagar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-checkout shadow-sm p-3 text-light">
+                <div class="card-body">
+                    <h5 class="card-title text-primary mb-3">Total a Pagar</h5>
+                    <h2 id="totalPagarCheckout" class="text-success fw-bold mb-3">$0</h2>
+                    <p class="text-muted small">Incluye despacho a domicilio y productos seleccionados en formato físico.</p>
+                    <a href="carrito.html" class="btn btn-outline-light btn-sm w-100 rounded-pill mt-2">Modificar Carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const totalGuardado = localStorage.getItem('akiba_total_pagar') || '0';
+        document.getElementById('totalPagarCheckout').textContent = '$' + parseInt(totalGuardado).toLocaleString('es-CL');
+    });
+
+    function simularCompra(event) {
+        event.preventDefault();
+        alert("¡Compra procesada con éxito a través de Webpay! Gracias por tu pedido.");
+        localStorage.removeItem('akiba_carrito'); // Vaciar carrito
+        localStorage.removeItem('akiba_total_pagar');
+        window.location.href = "index.html"; 
+    }
+</script>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
