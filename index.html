@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akiba Store - Tienda de Entretenimiento Físico y Merchandising</title>
+    <title>Ñackson Store - Tienda de Entretenimiento Físico y Merchandising</title>
     
     <!-- Google Fonts: Changa y Dela Gothic One -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +15,129 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
+
+        /* EFECTO HEADER INTELIGENTE (ESTILO SPOTIFY) */
+.navbar-futurista {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    transition: transform 0.35s ease-in-out, background-color 0.35s ease;
+}
+
+/* Esta clase moverá la barra fuera de la pantalla hacia arriba */
+.navbar-oculta {
+    transform: translateY(-100%);
+}
+
+        /* REGISTRO DE VARIABLE PARA ANIMAR EL ÁNGULO DEL ARCOÍRIS */
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes girarArcoiris {
+            to {
+                --angle: 360deg;
+            }
+        }
+
+        /* ESTILOS DE LA TARJETA CON BORDE ARCOÍRIS FLUIDO */
+        .categoria-card {
+            position: relative;
+            background-color: #111827;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            z-index: 1;
+            border: none !important; /* Quita el borde por defecto */
+        }
+
+        /* CAPA INTERNA PARA LA IMAGEN Y CAPAS DE TEXTO */
+        .categoria-card img {
+            transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+            filter: brightness(0.85);
+        }
+
+        /* MARCO GIRATORIO ARCOÍRIS CON CONIC-GRADIENT (PSEUDOELEMENTO ::before) */
+        .categoria-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: conic-gradient(
+                from var(--angle), 
+                #ff0055, 
+                #7a00ff, 
+                #00e5ff, 
+                #00ff66, 
+                #ffea00, 
+                #ff0055
+            );
+            border-radius: 12px; /* Ajuste para bordes redondeados */
+            z-index: -1;
+            opacity: 0; /* Oculto por defecto */
+            transition: opacity 0.35s ease;
+            animation: girarArcoiris 2.5s linear infinite;
+        }
+
+        /* RESPLANDOR/GLOW EXTERNO CON LOS MISMOS COLORES (PSEUDOELEMENTO ::after) */
+        .categoria-card::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: conic-gradient(
+                from var(--angle), 
+                #ff0055, 
+                #7a00ff, 
+                #00e5ff, 
+                #00ff66, 
+                #ffea00, 
+                #ff0055
+            );
+            border-radius: 14px;
+            z-index: -2;
+            opacity: 0;
+            filter: blur(12px); /* Crea la luz de neón proyectada */
+            transition: opacity 0.35s ease;
+            animation: girarArcoiris 2.5s linear infinite;
+        }
+
+        /* --- EFECTOS EN HOVER --- */
+        .categoria-card:hover {
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        /* Muestra el arcoíris y su resplandor al pasar el cursor */
+        .categoria-card:hover::before,
+        .categoria-card:hover::after {
+            opacity: 1;
+        }
+
+        .categoria-card:hover img {
+            transform: scale(1.08);
+            opacity: 0.95 !important;
+            filter: brightness(1.1);
+        }
+
+        .categoria-card h3 {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .categoria-card:hover h3 {
+            color: #ffffff !important;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 20px rgba(0, 229, 255, 0.8);
+            letter-spacing: 1.5px;
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.8);
+        }
         body {
             background-color: #0b0f19;
             color: #f8f9fa;
@@ -187,28 +310,7 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
-        /* BANNER PANORÁMICO DE LADO A LADO CON DIFUMINADO INFERIOR */
-        .seccion-productos-img {
-            width: 100%;
-            margin: 20px 0 10px 0;
-            padding: 0 30px;
-        }
-
-        .imagen-productos-banner {
-            width: 100%;
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            object-fit: cover;
-            max-height: 520px;
-            display: block;
-            
-            /* EFECTO DE DIFUMINADO SUAVE HACIA ABAJO */
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-        }
-
-        /* Tarjetas de productos */
+        /* Tarjetas de productos y categorías */
         .card {
             transition: all 0.3s ease;
         }
@@ -216,6 +318,31 @@
             transform: translateY(-5px);
             border-color: #0d6efd !important;
             box-shadow: 0 0 25px rgba(13, 110, 253, 0.4);
+        }
+
+        /* ESTILOS PARA LAS TARJETAS DE CATEGORÍAS */
+        .categoria-card {
+            transition: all 0.3s ease;
+            background-color: #111827;
+        }
+
+        .categoria-card:hover {
+            transform: translateY(-4px);
+            border-color: #0d6efd !important;
+            box-shadow: 0 8px 25px rgba(13, 110, 253, 0.4);
+        }
+
+        .categoria-card img {
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .categoria-card:hover img {
+            transform: scale(1.08);
+            opacity: 0.9 !important;
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.8);
         }
 
         /* BOTÓN FLOTANTE DE REGALO (RULETA) */
@@ -342,13 +469,13 @@
             <div class="cintillo-item"><i class="bi bi-truck me-2"></i> DESPACHOS A TODO CHILE</div>
             <div class="cintillo-item"><i class="bi bi-credit-card-2-front-fill me-2"></i> PAGA HASTA 6 CUOTAS SIN INTERÉS CON WEBPAY</div>
             <div class="cintillo-item"><i class="bi bi-gift-fill me-2"></i> 5% DCTO EXTRA EN TU PRIMERA COMPRA</div>
-            <div class="cintillo-item"><i class="bi bi-broadcast me-2"></i> ESCUCHA AKIBA RADIO LIVE EN VIVO</div>
+            <div class="cintillo-item"><i class="bi bi-broadcast me-2"></i> ESCUCHA ÑACKSON RADIO LIVE EN VIVO</div>
             
             <div class="cintillo-item"><i class="bi bi-controller me-2"></i> ¡TODO EN FORMATO FÍSICO Y COLECCIONABLES!</div>
             <div class="cintillo-item"><i class="bi bi-truck me-2"></i> DESPACHOS A TODO CHILE</div>
             <div class="cintillo-item"><i class="bi bi-credit-card-2-front-fill me-2"></i> PAGA HASTA 6 CUOTAS SIN INTERÉS CON WEBPAY</div>
             <div class="cintillo-item"><i class="bi bi-gift-fill me-2"></i> 5% DCTO EXTRA EN TU PRIMERA COMPRA</div>
-            <div class="cintillo-item"><i class="bi bi-broadcast me-2"></i> ESCUCHA AKIBA RADIO LIVE EN VIVO</div>
+            <div class="cintillo-item"><i class="bi bi-broadcast me-2"></i> ESCUCHA ÑACKSON RADIO LIVE EN VIVO</div>
         </div>
     </div>
 
@@ -356,8 +483,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-futurista sticky-top border-bottom border-secondary">
         <div class="container">
             <a class="navbar-brand text-danger d-flex align-items-center gap-2" href="index.html">
-                <img src="img/logo.gif" alt="Logo Akiba Store" width="40" height="40" class="rounded-circle border border-danger object-fit-cover">
-                <span class="text-light">Akiba <span class="text-primary">Store</span></span>
+                <img src="img/logo.gif" alt="Logo Ñackson Store" width="40" height="40" class="rounded-circle border border-danger object-fit-cover">
+                <span class="text-light">Ñackson <span class="text-primary">Store</span></span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -392,7 +519,7 @@
                         </a>
                     </li>
 
-                    <!-- Botón Panel Admin (Dinámico para Admin solo en el Index) -->
+                    <!-- Botón Panel Admin -->
                     <div id="enlaceAdminContainer" class="d-inline-block ms-lg-2"></div>
                 </ul>
 
@@ -422,15 +549,10 @@
         <div class="hero-overlay"></div>
 
         <div class="container position-relative z-2">
-            <h1 id="tituloAkiba" class="hero-titulo-especial text-white mb-2">AKIBA STORE</h1>
+            <h1 id="tituloAkiba" class="hero-titulo-especial text-white mb-2">ÑACKSON STORE</h1>
             <p class="small mb-3 font-monospace hero-subtítulo" style="max-width: 550px; margin: 0 auto;">Revive la nostalgia. Siente el poder de lo físico. Colecciona discos, películas, series, anime, videojuegos y artículos exclusivos con la mejor calidad.</p>
         </div>
     </header>
-
-    <!-- BANNER PANORÁMICO DE LADO A LADO CON DIFUMINADO INFERIOR -->
-    <div class="seccion-productos-img text-center">
-        <img src="img/productos.jpg" alt="Productos Akiba Store" class="imagen-productos-banner">
-    </div>
 
     <!-- 3. SECCIÓN DE NUEVOS PRODUCTOS -->
     <main class="container my-5 flex-grow-1" id="catalogo">
@@ -440,12 +562,11 @@
             </div>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 mb-5">
+            <!-- Producto 1: Evangelion -->
             <div class="col-md-4">
-                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
-                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 180px;">
-                        <span class="text-muted small">Sin foto</span>
-                    </div>
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm overflow-hidden">
+                    <img src="img/evangelion.jpg" alt="Neon Genesis Evangelion" class="card-img-top object-fit-cover" style="height: 220px;">
                     <div class="card-body d-flex flex-column">
                         <h3 class="card-title h5">Neon Genesis Evangelion - Box Set</h3>
                         <p class="card-text text-muted small">Edición coleccionista en formato Blu-ray.</p>
@@ -456,11 +577,11 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Producto 2: Vinilo Rock -->
             <div class="col-md-4">
-                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
-                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 180px;">
-                        <span class="text-muted small">Sin foto</span>
-                    </div>
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=600&auto=format&fit=crop" alt="Álbum Rock Clásico" class="card-img-top object-fit-cover" style="height: 220px;">
                     <div class="card-body d-flex flex-column">
                         <h3 class="card-title h5">Álbum Rock Clásico (Vinilo)</h3>
                         <p class="card-text text-muted small">Edición remasterizada de alta fidelidad.</p>
@@ -471,11 +592,11 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Producto 3: Cyberpunk -->
             <div class="col-md-4">
-                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm">
-                    <div class="bg-dark text-white text-center py-5 rounded-top border-bottom border-secondary" style="height: 180px;">
-                        <span class="text-muted small">Sin foto</span>
-                    </div>
+                <div class="card h-100 bg-secondary bg-opacity-10 border border-secondary text-light shadow-sm overflow-hidden">
+                    <img src="img/cyberpunk.jpg" alt="Cyberpunk Edgerunners" class="card-img-top object-fit-cover" style="height: 220px;">
                     <div class="card-body d-flex flex-column">
                         <h3 class="card-title h5">Cyberpunk Edgerunners - Blu-ray</h3>
                         <p class="card-text text-muted small">Serie completa con extras exclusivos.</p>
@@ -487,11 +608,85 @@
                 </div>
             </div>
         </div>
+
+        <!-- 4. SECCIÓN DE CUADROS DE CATEGORÍAS CON IMÁGENES -->
+        <div class="row mb-4 align-items-center pt-3 border-top border-secondary">
+            <div class="col-md-6">
+                <h2 class="mb-0 text-light fs-3">EXPLORA POR CATEGORÍA</h2>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-6 col-md-3">
+                <a href="musica.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_musica.jpg" alt="Música" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">MÚSICA</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="anime.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_anime.jpg" alt="Anime" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">ANIME</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="videojuegos.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_videojuegos.jpg" alt="Videojuegos" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">VIDEOJUEGOS</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="peliculas.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_peliculas.jpg" alt="Películas" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">PELÍCULAS</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="series.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_series.jpg" alt="Series" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">SERIES</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="bluray.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_bluray.jpg" alt="Blu-ray / DVD" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">BLU-RAY / DVD</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="accesorios.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_accesorios.jpg" alt="Accesorios" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">ACCESORIOS</h3>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="merchandising.html" class="categoria-card p-0 overflow-hidden position-relative rounded-3 d-block border border-secondary shadow-sm">
+                    <img src="img/cat_merch.jpg" alt="Merchandising" class="w-100 object-fit-cover" style="height: 110px; opacity: 0.75;">
+                    <div class="position-absolute top-50 start-50 translate-middle w-100 text-center px-2">
+                        <h3 class="h6 mb-0 text-white fw-bold text-shadow">MERCHANDISING</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
     </main>
 
     <!-- BOTÓN FLOTANTE DE REGALO (RULETA) -->
     <div id="ruletaWidget">
-        <button class="btn btn-danger rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" onclick="toggleRuletaModal()" title="Ruleta de Premios Akiba">
+        <button class="btn btn-danger rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" onclick="toggleRuletaModal()" title="Ruleta de Premios Ñackson">
             <i class="bi bi-gift-fill fs-3 text-white"></i>
         </button>
     </div>
@@ -500,7 +695,7 @@
     <div id="radioWidget">
         <div id="radioPanel" class="radio-panel p-3">
             <div class="d-flex justify-content-between align-items-center mb-2 border-bottom border-secondary pb-2">
-                <span class="fw-bold text-primary small"><i class="bi bi-broadcast me-1"></i> AKIBA RADIO LIVE</span>
+                <span class="fw-bold text-primary small"><i class="bi bi-broadcast me-1"></i> ÑACKSON RADIO LIVE</span>
                 <button type="button" class="btn-close btn-close-white btn-sm" onclick="toggleRadioPanel()"></button>
             </div>
             <div class="text-center mb-3">
@@ -521,7 +716,7 @@
                 </button>
             </div>
         </div>
-        <button id="btnRadioToggle" class="btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" onclick="toggleRadioPanel()" title="Abrir Radio Akiba">
+        <button id="btnRadioToggle" class="btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" onclick="toggleRadioPanel()" title="Abrir Radio Ñackson">
             <i id="iconoNota" class="bi bi-music-note-beamed fs-3 text-white"></i>
             <div id="iconoEq" class="equalizer-icon" style="display: none;">
                 <div class="eq-bar"></div>
@@ -556,12 +751,12 @@
         </div>
     </div>
 
-    <!-- 4. FOOTER PROFESIONAL -->
+    <!-- 5. FOOTER PROFESIONAL -->
     <footer class="bg-black text-light pt-5 pb-3 border-top border-secondary mt-auto">
         <div class="container">
             <div class="row g-4 mb-4">
                 <div class="col-md-4">
-                    <h5 class="text-uppercase text-primary fw-bold mb-3">Akiba Store</h5>
+                    <h5 class="text-uppercase text-primary fw-bold mb-3">Ñackson Store</h5>
                     <p class="text-white-50 small mb-3">Revive la nostalgia. Siente el poder de lo físico. Tu tienda especializada en entretenimiento físico y artículos de colección.</p>
                     <div class="d-flex gap-3 fs-5 text-light">
                         <a href="#" class="text-light hover-light"><i class="bi bi-instagram"></i></a>
@@ -583,8 +778,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <h5 class="text-uppercase text-light fw-bold fs-6 mb-3">Contacto Akiba</h5>
-                    <p class="mb-2 text-white-50 small"><i class="bi bi-envelope-fill me-2 text-primary"></i> contacto@akibastore.cl</p>
+                    <h5 class="text-uppercase text-light fw-bold fs-6 mb-3">Contacto Ñackson</h5>
+                    <p class="mb-2 text-white-50 small"><i class="bi bi-envelope-fill me-2 text-primary"></i> contacto@nacksonstore.cl</p>
                     <p class="mb-2 text-white-50 small"><i class="bi bi-geo-alt-fill me-2 text-primary"></i> Santiago, Chile</p>
                     
                     <div class="mt-4 p-3 bg-dark rounded border border-secondary">
@@ -607,7 +802,7 @@
 
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0 text-white-50 small">&copy; 2026 Akiba Store. Creado por Seba. Todos los derechos reservados.</p>
+                    <p class="mb-0 text-white-50 small">&copy; 2026 Ñackson Store. Creado por Seba. Todos los derechos reservados.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
                     <span class="text-white-50 small">Desarrollado con Bootstrap 5 y tecnologías web modernas</span>
@@ -618,6 +813,26 @@
 
     <!-- SCRIPTS DE SESIÓN, RULETA Y RADIO -->
     <script>
+
+        let ultimoScroll = 0;
+const navbar = document.querySelector('.navbar-futurista');
+const limiteScroll = 80; // Umbral en píxeles antes de empezar a ocultar
+
+window.addEventListener('scroll', () => {
+    const scrollActual = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Si scrolleas hacia abajo y pasaste el límite, oculta la barra
+    if (scrollActual > ultimoScroll && scrollActual > limiteScroll) {
+        navbar.classList.add('navbar-oculta');
+    } 
+    // Si scrolleas hacia arriba, vuelve a mostrarla
+    else if (scrollActual < ultimoScroll) {
+        navbar.classList.remove('navbar-oculta');
+    }
+
+    // Actualiza la posición anterior
+    ultimoScroll = scrollActual <= 0 ? 0 : scrollActual;
+});
         const premios = [
             { texto: "35% DCTO", mensaje: "¡Ganaste 35% DCTO!", color: "#dc3545" },
             { texto: "40% DCTO", mensaje: "¡Ganaste 40% DCTO!", color: "#0d6efd" },
@@ -633,11 +848,11 @@
             const enlaceAdminContainer = document.getElementById("enlaceAdminContainer");
 
             if (sesionIniciada === "true") {
-                const nombreActual = localStorage.getItem("akiba_nombre") || "Usuario Akiba";
+                const nombreActual = localStorage.getItem("akiba_nombre") || "Usuario Ñackson";
                 const avatarActual = localStorage.getItem("akiba_avatar") || "img/logo.gif";
                 const correoActual = localStorage.getItem("akiba_correo") || "";
                 
-                const esAdmin = (localStorage.getItem("akiba_es_admin") === "true" || correoActual.toLowerCase() === "admin@akibastore.cl");
+                const esAdmin = (localStorage.getItem("akiba_es_admin") === "true" || correoActual.toLowerCase() === "admin@akibastore.cl" || correoActual.toLowerCase() === "admin@nacksonstore.cl");
 
                 if (esAdmin) {
                     if (enlaceAdminContainer) {
@@ -890,7 +1105,6 @@
         }
     </script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- Conexión corregida al archivo JS generado desde TypeScript en la carpeta ts/ -->
     <script src="ts/main.js"></script>
 </body>
 </html>
